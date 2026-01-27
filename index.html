@@ -194,11 +194,6 @@
             box-shadow: 0 12px 24px rgba(255, 71, 87, 0.25);
         }
 
-        .feature-card.emergency-card {
-            border-right: 5px solid #ff6b6b;
-            background: linear-gradient(145deg, #1e3a5f 0%, #132f4c 100%);
-        }
-
         .feature-card h3 {
             color: #4dabf7;
             margin-bottom: 1rem;
@@ -234,77 +229,137 @@
             font-size: 0.9rem;
         }
 
-        .online-status {
+        /* استایل‌های جدید برای بخش Medic پیشرفته */
+        .medic-info-card {
+            grid-column: span 2;
+            border-right: 5px solid #4dabf7;
+        }
+
+        .medic-status {
+            margin: 1.5rem 0;
+        }
+
+        .medic-member {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
+            gap: 15px;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            align-items: center;
+            border-right: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .medic-member:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+        }
+
+        .medic-member:nth-child(1) {
+            border-right-color: #ffd700; /* طلایی برای مدیر */
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .medic-member:nth-child(2), .medic-member:nth-child(3) {
+            border-right-color: #4dabf7; /* آبی برای ناظران */
+            background: rgba(77, 171, 247, 0.05);
+        }
+
+        .medic-member:nth-child(4), .medic-member:nth-child(5) {
+            border-right-color: #51cf66; /* سبز برای پارامدیک‌ها */
+            background: rgba(81, 207, 102, 0.05);
+        }
+
+        .member-name {
+            font-weight: bold;
+            color: #e0e0e0;
+        }
+
+        .member-rank {
+            color: #a5d8ff;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 1rem 0;
+            gap: 5px;
         }
 
-        .online-dot {
-            width: 10px;
-            height: 10px;
-            background: #51cf66;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
+        .member-duty {
+            font-size: 0.85rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            text-align: center;
         }
 
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+        .member-duty-online {
+            background: rgba(81, 207, 102, 0.2);
+            color: #51cf66;
+            border: 1px solid #51cf66;
         }
 
-        #online-count {
+        .member-duty-resting {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+        }
+
+        .member-duty-offline {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+        }
+
+        .member-level {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            text-align: center;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 3px 8px;
+            border-radius: 8px;
+        }
+
+        .medic-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #2d4a7c;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+        }
+
+        .status-active {
             color: #51cf66;
             font-weight: bold;
-            font-size: 1.1rem;
         }
 
-        .small-btn {
+        .medic-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .refresh-btn {
             background: #2d4a7c;
             color: white;
             border: 1px solid #4dabf7;
-            padding: 0.5rem 1.5rem;
+            padding: 8px 15px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 0.9rem;
-            margin-top: auto;
             transition: all 0.3s;
-            align-self: flex-start;
         }
 
-        .small-btn:hover {
+        .refresh-btn:hover {
             background: #3a5b8c;
-            transform: translateY(-2px);
-        }
-
-        .small-btn.emergency-btn {
-            background: #ff4757;
-            border-color: #ff6b6b;
-        }
-
-        .small-btn.emergency-btn:hover {
-            background: #ff6b6b;
-        }
-
-        .emergency-contact {
-            margin: 1rem 0;
-        }
-
-        .emergency-contact p {
-            margin: 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .emergency-contact code {
-            background: rgba(255, 71, 87, 0.2);
-            padding: 2px 8px;
-            border-radius: 4px;
-            color: #ff6b6b;
-            font-family: monospace;
         }
 
         /* اطلاعات سریع */
@@ -418,6 +473,18 @@
         }
 
         /* ریسپانسیو */
+        @media (max-width: 1024px) {
+            .medic-info-card {
+                grid-column: span 1;
+            }
+            
+            .medic-member {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 8px;
+            }
+        }
+
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -452,6 +519,10 @@
                 grid-template-columns: 1fr;
             }
             
+            .medic-member {
+                grid-template-columns: 1fr;
+            }
+            
             .info-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -466,6 +537,10 @@
             .info-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .medic-stats {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -477,11 +552,10 @@
             <p class="server-info">GTA V RolePlay Server</p>
         </div>
         <nav>
-            <!-- 🔄 تغییر ۱: لینک‌های منوی اصلی -->
             <a href="index.html">🏠 خانه</a>
             <a href="rules.html">📋 قوانین</a>
-            <a href="auth.html">👥 عضویت</a>  <!-- تغییر از "ورود" به "عضویت" -->
-            <a href="gallery.html">🖼️ گالری</a>  <!-- فعال کردن لینک گالری -->
+            <a href="auth.html">👥 عضویت</a>
+            <a href="gallery.html">🖼️ گالری</a>
             <a href="#" onclick="alert('به زودی فعال می‌شود!')">📰 اخبار</a>
         </nav>
     </header>
@@ -498,52 +572,59 @@
                 <button class="cta-btn" onclick="window.location.href='auth.html'">
                     👥 پیوستن به Medic
                 </button>
-                <button class="cta-btn" onclick="testSite()">
-                    🧪 تست سایت
-                </button>
+                <!-- دکمه "تست سایت" حذف شد -->
             </div>
         </section>
 
         <section class="features">
+            <!-- کارت خدمات -->
             <div class="feature-card">
-                <h3>👨‍⚕️ تیم Medic</h3>
-                <p>با اعضای حرفه‌ای واحد Medic آشنا شوید</p>
-                <div class="online-status">
-                    <span class="online-dot"></span>
-                    <span id="online-count">در حال بارگذاری...</span>
-                </div>
-                <button class="small-btn" onclick="window.location.href='gallery.html#team'">
-                    مشاهده اعضا
-                </button>
-            </div>
-            
-            <div class="feature-card">
-                <h3>🚑 خدمات ما</h3>
+                <h3>🚑 خدمات Medic</h3>
                 <ul class="services-list">
-                    <li>✅ پاسخ‌گویی اضطراری</li>
-                    <li>✅ انتقال بیمار</li>
+                    <li>✅ پاسخ‌گویی سریع</li>
+                    <li>✅ ریوایو کردن افراد در سریع‌ترین حالت</li>
                     <li>✅ درمان در صحنه</li>
-                    <li>✅ معاینه دوره‌ای</li>
-                    <li>✅ آموزش کمک‌های اولیه</li>
+                    <li>✅ Heal کردن بیمار</li>
+                    <!-- "آموزش کمک‌های اولیه" و "معاینه دوره‌ای" حذف شدند -->
                 </ul>
             </div>
             
-            <div class="feature-card emergency-card">
-                <h3>📞 تماس فوری</h3>
-                <p>برای درخواست کمک در بازی:</p>
-                <div class="emergency-contact">
-                    <p>📢 دستور: <code>/call 911</code></p>
-                    <p>📍 یا از GPS استفاده کنید</p>
-                    <p>🏥 بیمارستان: Central Los Santos</p>
+            <!-- کارت Medic پیشرفته -->
+            <div class="feature-card medic-info-card">
+                <h3>👨‍⚕️ وضعیت پیشرفته واحد Medic</h3>
+                
+                <div class="medic-controls">
+                    <button class="refresh-btn" onclick="refreshMedicStatus()">
+                        🔄 به‌روزرسانی وضعیت
+                    </button>
+                    <button class="refresh-btn" onclick="window.location.href='auth.html'">
+                        📝 درخواست عضویت
+                    </button>
                 </div>
-                <button class="small-btn emergency-btn" onclick="simulateEmergency()">
-                    🔔 شبیه‌سازی تماس
-                </button>
+                
+                <div class="medic-status" id="medicStatus">
+                    <!-- اطلاعات Medic اینجا لود می‌شود -->
+                </div>
+                
+                <div class="medic-stats">
+                    <div class="stat-item">
+                        <span>📊 وضعیت واحد:</span>
+                        <span class="status-active" id="unitStatus">فعال و عملیاتی</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>👥 پرسنل حاضر:</span>
+                        <span id="activePersonnel">در حال بارگذاری...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>🚑 آمبولانس‌های فعال:</span>
+                        <span id="activeAmbulances">در حال بارگذاری...</span>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section class="quick-info">
-            <h3>📊 اطلاعات سریع</h3>
+            <h3>📊 آمار سریع واحد Medic</h3>
             <div class="info-grid">
                 <div class="info-item">
                     <span>⏰</span>
@@ -551,15 +632,15 @@
                 </div>
                 <div class="info-item">
                     <span>👥</span>
-                    <p>تعداد پرسنل: ۱۵+</p>
+                    <p>تعداد کل پرسنل: ۱۵+</p>
                 </div>
                 <div class="info-item">
                     <span>🚑</span>
-                    <p>آمبولانس: ۸ دستگاه</p>
+                    <p>آمبولانس کل: ۸ دستگاه</p>
                 </div>
                 <div class="info-item">
                     <span>⚡</span>
-                    <p>مدت پاسخگویی: <۳ دقیقه</p>
+                    <p>میانگین پاسخگویی: ۲.۵ دقیقه</p>
                 </div>
             </div>
         </section>
@@ -570,7 +651,6 @@
             <div class="footer-section">
                 <h4>🚑 واحد Medic</h4>
                 <p>ارائه دهنده خدمات درمانی در سرور رول پلی</p>
-                <!-- 🔄 تغییر ۲: لینک‌های فوتر -->
                 <a href="rules.html">📋 قوانین Medic</a>
                 <a href="auth.html">📝 درخواست عضویت</a>
                 <a href="gallery.html">🖼️ گالری تصاویر</a>
@@ -583,173 +663,199 @@
                 <a href="gallery.html">📸 گالری فعالیت‌ها</a>
             </div>
             <div class="footer-section">
-                <h4>🎮 در بازی</h4>
-                <p>فرمان: <code>/medic help</code></p>
-                <p>فراخوانی: <code>/call 911</code></p>
-                <p>عضویت: <code>/medic join</code></p>
+                <h4>🎮 فرمان‌های درون بازی</h4>
+                <p>درخواست Medic: <code>/call 911</code></p>
+                <p>اطلاعات Medic: <code>/medic info</code></p>
+                <p>عضویت در Medic: <code>/medic join</code></p>
             </div>
         </div>
         <div class="footer-bottom">
             <p>© 2024 واحد Medic - سرور رول پلی GTA</p>
-            <p class="dev-note">سایت اختصاصی برای گیم مود رول پلی | نسخه ۲.۰</p>
+            <p class="dev-note">سیستم پیشرفته ردیابی وضعیت پرسنل | نسخه ۲.۱</p>
         </div>
     </footer>
 
     <script>
-        // ============================================
-        // 📱 کدهای اصلی سایت Medic
-        // ============================================
-
-        console.log("🚑 سایت واحد Medic بارگذاری شد!");
-
-        // وقتی صفحه کاملاً لود شد
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("✅ DOM آماده است");
-            
-            // شمارنده آنلاین (تصادفی)
-            updateOnlineCount();
-            
-            // تنظیم دکمه ورود
-            setupLoginButton();
-            
-            // تنظیم کلیک روی دکمه‌ها
-            setupButtons();
-        });
-
-        // آپدیت شمارنده آنلاین
-        function updateOnlineCount() {
-            const onlineElement = document.getElementById('online-count');
-            if (onlineElement) {
-                // عدد تصادفی بین ۳ تا ۱۲
-                const onlineCount = Math.floor(Math.random() * 10) + 3;
-                onlineElement.textContent = `${onlineCount} نفر آنلاین`;
+        // داده‌های واحد Medic (از بازی گرفته می‌شود)
+        const medicData = {
+            members: [
+                {
+                    id: 1,
+                    name: "دکتر آراس",
+                    rank: "مدیر ارشد",
+                    rankIcon: "👑",
+                    rankLevel: 100,
+                    duty: "online",
+                    dutyText: "🟢 در حال خدمت",
+                    joinDate: "۱۴۰۲/۰۸/۱۵",
+                    missions: 247,
+                    successRate: "۹۸٪"
+                },
+                {
+                    id: 2,
+                    name: "پارامدیک علی",
+                    rank: "ناظر ارشد",
+                    rankIcon: "🎓",
+                    rankLevel: 85,
+                    duty: "online",
+                    dutyText: "🟢 در حال گشت‌زنی",
+                    joinDate: "۱۴۰۲/۰۹/۰۱",
+                    missions: 189,
+                    successRate: "۹۶٪"
+                },
+                {
+                    id: 3,
+                    name: "اکبر آمبولانس",
+                    rank: "ناظر",
+                    rankIcon: "🎓",
+                    rankLevel: 78,
+                    duty: "resting",
+                    dutyText: "🟡 در حال استراحت",
+                    joinDate: "۱۴۰۲/۰۹/۱۰",
+                    missions: 156,
+                    successRate: "۹۴٪"
+                },
+                {
+                    id: 4,
+                    name: "رضا درمان",
+                    rank: "پارامدیک",
+                    rankIcon: "🚑",
+                    rankLevel: 65,
+                    duty: "online",
+                    dutyText: "🟢 آماده به خدمت",
+                    joinDate: "۱۴۰۲/۱۰/۰۵",
+                    missions: 89,
+                    successRate: "۹۲٪"
+                },
+                {
+                    id: 5,
+                    name: "محسن نجات",
+                    rank: "پارامدیک",
+                    rankIcon: "🚑",
+                    rankLevel: 58,
+                    duty: "offline",
+                    dutyText: "🔴 آفلاین",
+                    joinDate: "۱۴۰۲/۱۰/۲۰",
+                    missions: 45,
+                    successRate: "۸۸٪"
+                },
+                {
+                    id: 6,
+                    name: "سارا پرستار",
+                    rank: "کارآموز",
+                    rankIcon: "📚",
+                    rankLevel: 32,
+                    duty: "online",
+                    dutyText: "🟢 تحت آموزش",
+                    joinDate: "۱۴۰۲/۱۱/۰۱",
+                    missions: 12,
+                    successRate: "۸۵٪"
+                }
+            ],
+            stats: {
+                totalMembers: 15,
+                onlineNow: 4,
+                activeAmbulances: 5,
+                totalAmbulances: 8,
+                avgResponseTime: "۲.۵ دقیقه",
+                monthlyMissions: 47,
+                successRate: "۹۵٪"
             }
-        }
+        };
 
-        // تنظیم دکمه ورود
-        function setupLoginButton() {
-            const authBtn = document.getElementById('authBtn');
-            if (authBtn) {
-                authBtn.addEventListener('click', function() {
-                    console.log("دکمه عضویت کلیک شد");
-                    window.location.href = 'auth.html';
-                });
-            }
-        }
-
-        // تنظیم کلیه دکمه‌ها
-        function setupButtons() {
-            // دکمه‌های CTA
-            const ctaButtons = document.querySelectorAll('.cta-btn');
-            ctaButtons.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    console.log(`دکمه ${this.textContent} کلیک شد`);
-                });
+        // تابع نمایش وضعیت Medic
+        function renderMedicStatus() {
+            const medicStatusDiv = document.getElementById('medicStatus');
+            const activePersonnelSpan = document.getElementById('activePersonnel');
+            const activeAmbulancesSpan = document.getElementById('activeAmbulances');
+            
+            let html = '';
+            let onlineCount = 0;
+            
+            // نمایش هر عضو
+            medicData.members.forEach(member => {
+                if (member.duty === 'online') onlineCount++;
+                
+                const dutyClass = member.duty === 'online' ? 'member-duty-online' : 
+                                 member.duty === 'resting' ? 'member-duty-resting' : 'member-duty-offline';
+                
+                html += `
+                    <div class="medic-member">
+                        <span class="member-name">${member.name}</span>
+                        <span class="member-rank">${member.rankIcon} ${member.rank}</span>
+                        <span class="member-duty ${dutyClass}">${member.dutyText}</span>
+                        <span class="member-level">سطح ${member.rankLevel}</span>
+                    </div>
+                `;
             });
             
-            // دکمه‌های کوچک
-            const smallButtons = document.querySelectorAll('.small-btn');
-            smallButtons.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    console.log(`دکمه کوچک ${this.textContent} کلیک شد`);
-                });
-            });
+            medicStatusDiv.innerHTML = html;
+            activePersonnelSpan.textContent = `${onlineCount} نفر`;
+            activeAmbulancesSpan.textContent = `${medicData.stats.activeAmbulances} از ${medicData.stats.totalAmbulances} دستگاه`;
+            
+            // آپدیت وضعیت واحد
+            document.getElementById('unitStatus').textContent = 
+                onlineCount >= 3 ? "فعال و عملیاتی" : 
+                onlineCount >= 1 ? "محدود" : "غیرفعال";
         }
 
-        // تست سایت
-        function testSite() {
-            const tests = [
-                "✅ سایت بارگذاری شد",
-                "✅ استایل‌ها اعمال شد",
-                "✅ جاوااسکریپت فعال است",
-                "✅ لینک‌ها کار می‌کنند",
-                "✅ واحد Medic آماده خدمات‌رسانی!"
-            ];
+        // تابع به‌روزرسانی وضعیت
+        function refreshMedicStatus() {
+            // شبیه‌سازی دریافت داده از بازی
+            medicData.stats.onlineNow = Math.floor(Math.random() * 3) + 3; // 3-5 نفر
+            medicData.stats.activeAmbulances = Math.floor(Math.random() * 3) + 4; // 4-6 دستگاه
             
-            const message = tests.join('\n');
-            alert("🧪 گزارش تست سایت:\n\n" + message);
+            // تغییر وضعیت تصادفی برخی اعضا
+            medicData.members.forEach(member => {
+                if (Math.random() > 0.7) { // 30% احتمال تغییر
+                    const duties = ['online', 'resting', 'offline'];
+                    const dutyTexts = {
+                        'online': ['🟢 در حال خدمت', '🟢 آماده به خدمت', '🟢 در حال گشت‌زنی'],
+                        'resting': ['🟡 در حال استراحت', '🟡 مرخصی کوتاه'],
+                        'offline': ['🔴 آفلاین', '🔴 تعطیل']
+                    };
+                    
+                    const newDuty = duties[Math.floor(Math.random() * duties.length)];
+                    member.duty = newDuty;
+                    member.dutyText = dutyTexts[newDuty][Math.floor(Math.random() * dutyTexts[newDuty].length)];
+                }
+            });
             
-            // تغییر رنگ هدر برای نمایش فعالیت
-            const header = document.querySelector('header');
-            header.style.borderBottom = '4px solid #2ecc71';
+            renderMedicStatus();
+            alert('✅ وضعیت واحد Medic به‌روزرسانی شد!');
+        }
+
+        // تابع شبیه‌سازی دریافت داده از API بازی
+        function fetchFromGameAPI() {
+            // این تابع می‌تواند از API سرور بازی داده بگیرد
+            console.log('📡 در حال دریافت داده از سرور بازی...');
+            
+            // شبیه‌سازی تأخیر شبکه
             setTimeout(() => {
-                header.style.borderBottom = '4px solid #ff4757';
-            }, 2000);
-            
-            return true;
+                renderMedicStatus();
+                console.log('✅ داده‌های Medic دریافت شدند.');
+            }, 500);
         }
 
-        // شبیه‌سازی تماس اضطراری
+        // بارگذاری اولیه
+        document.addEventListener('DOMContentLoaded', function() {
+            renderMedicStatus();
+            fetchFromGameAPI();
+            
+            // به‌روزرسانی خودکار هر 60 ثانیه
+            setInterval(fetchFromGameAPI, 60000);
+            
+            console.log('🚑 سیستم ردیابی وضعیت Medic فعال شد.');
+        });
+
+        // حذف توابع قدیمی
+        function testSite() {
+            alert('این تابع حذف شده است.');
+        }
+        
         function simulateEmergency() {
-            const locations = [
-                "می‌دان وینسنت",
-                "فرودگاه بین‌المللی لوس سانتوس",
-                "بندرگاه",
-                "محله راکفورد هیلز",
-                "مرکز شهر"
-            ];
-            
-            const injuries = [
-                "تصادف خودرو",
-                "سقوط از ارتفاع",
-                "زخم گلوله",
-                "حمله قلبی",
-                "مسمومیت"
-            ];
-            
-            const randomLocation = locations[Math.floor(Math.random() * locations.length)];
-            const randomInjury = injuries[Math.floor(Math.random() * injuries.length)];
-            
-            const emergencyMessage = `
-🚨 **تماس اضطراری شبیه‌سازی شده**
-    
-📍 مکان: ${randomLocation}
-🤕 نوع حادثه: ${randomInjury}
-👥 تعداد مصدوم: ${Math.floor(Math.random() * 3) + 1}
-⏱️ زمان تخمینی رسیدن: ${Math.floor(Math.random() * 5) + 2} دقیقه
-    
-✅ واحد Medic در راه است!
-`;
-            
-            alert(emergencyMessage);
-            
-            // پخش صدای اضطراری (اگر مرورگر اجازه بده)
-            try {
-                const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-city-alert-siren-1007.mp3');
-                audio.volume = 0.3;
-                audio.play().catch(e => console.log("صدا پخش نشد:", e));
-            } catch (e) {
-                console.log("خطا در پخش صدا:", e);
-            }
+            alert('این تابع حذف شده است.');
         }
-
-        // نمایش تاریخ و زمان سرور
-        function showServerTime() {
-            const now = new Date();
-            const options = {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: false
-            };
-            
-            const persianDate = now.toLocaleDateString('fa-IR', options);
-            alert(`🕐 زمان سرور:\n${persianDate}\n\n⏰ ساعت بازی: ${Math.floor(Math.random() * 24)}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`);
-        }
-
-        // وقتی کاربر می‌خواهد صفحه رو ترک کند
-        window.addEventListener('beforeunload', function(e) {
-            console.log("👋 کاربر در حال ترک سایت است");
-        });
-
-        // وقتی اندازه پنجره تغییر می‌کند
-        window.addEventListener('resize', function() {
-            console.log(`📱 اندازه پنجره: ${window.innerWidth}x${window.innerHeight}`);
-        });
-
-        console.log("🚀 سایت Medic آماده خدمات‌رسانی!");
     </script>
 </body>
 </html>
