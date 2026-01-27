@@ -3,200 +3,479 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قوانین - واحد Medic</title>
+    <title>قوانین کامل - واحد Medic</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* استایل‌های مخصوص صفحه قوانین */
+        body {
+            background: #0a1929;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #132f4c 0%, #0a1929 100%);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #ff4757;
+        }
+        
+        .logo h1 {
+            color: #ff4757;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: #a5d8ff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 71, 87, 0.1);
+            color: #ff4757;
+        }
+        
+        .rules-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            text-align: center;
+            color: #4dabf7;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            border-bottom: 3px solid #ff4757;
+            padding-bottom: 15px;
+        }
+        
+        .rule-section {
+            background: linear-gradient(145deg, #132f4c 0%, #1e3a5f 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-right: 5px solid #ff4757;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .rule-section h3 {
+            color: #4dabf7;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .rule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .rule-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #2d4a7c;
+            transition: all 0.3s;
+        }
+        
+        .rule-card:hover {
+            transform: translateY(-5px);
+            border-color: #ff4757;
+        }
+        
+        .rule-card h4 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .rule-card ul {
+            list-style: none;
+            padding-right: 15px;
+        }
+        
+        .rule-card li {
+            padding: 8px 0;
+            color: #c0c0c0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .rule-card li:before {
+            content: "•";
+            color: #51cf66;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .protocol-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .protocol-card {
+            background: rgba(30, 58, 95, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #4dabf7;
+        }
+        
+        .protocol-card h4 {
+            color: #4dabf7;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .protocol-card p {
+            color: #e0e0e0;
+            line-height: 1.8;
+        }
+        
+        .hierarchy {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .rank-card {
+            background: linear-gradient(145deg, #1e3a5f 0%, #132f4c 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #4dabf7;
+            transition: all 0.3s;
+        }
+        
+        .rank-card:hover {
+            transform: scale(1.05);
+            border-color: #ff4757;
+        }
+        
+        .rank-card h4 {
+            color: #ff4757;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .join-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(145deg, #132f4c 0%, #1e3a5f 100%);
+            border-radius: 12px;
+            border: 3px solid #51cf66;
+        }
+        
+        .join-btn {
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+        
+        .join-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(81, 207, 102, 0.3);
+        }
+        
+        .rule-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            background: #2d4a7c;
+            color: white;
+            border: 1px solid #4dabf7;
+            padding: 10px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .action-btn:hover {
+            background: #3a5b8c;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .rule-grid, .protocol-section, .hierarchy {
+                grid-template-columns: 1fr;
+            }
+            
+            .rule-actions {
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- هدر سایت -->
     <header>
         <div class="logo">
-            <h1><i class="fas fa-book"></i> قوانین Medic</h1>
-            <p class="server-info">مقررات و دستورالعمل‌ها</p>
+            <h1>📋 قوانین واحد Medic</h1>
         </div>
         <nav>
-            <a href="index.html"><i class="fas fa-home"></i> خانه</a>
-            <a href="rules.html" class="active"><i class="fas fa-book"></i> قوانین</a>
-            <a href="auth.html"><i class="fas fa-sign-in-alt"></i> ورود</a>
-            <button onclick="window.location.href='index.html'" class="back-btn">
-                <i class="fas fa-arrow-right"></i> بازگشت
-            </button>
+            <a href="index.html">🏠 خانه</a>
+            <a href="rules.html" style="color: #ff4757; background: rgba(255,71,87,0.1);">📋 قوانین</a>
+            <a href="#" onclick="alert('به زودی فعال می‌شود!')">🖼️ گالری</a>
+            <a href="#" onclick="alert('به زودی فعال می‌شود!')">📰 اخبار</a>
+            <a href="auth.html">🔐 ورود</a>
         </nav>
     </header>
 
     <main class="rules-container">
-        <div class="rules-header">
-            <h2><i class="fas fa-gavel"></i> قوانین رسمی واحد Medic</h2>
-            <p>لطفاً قبل از عضویت یا همکاری، این قوانین را به دقت مطالعه کنید</p>
-            <div class="rules-meta">
-                <span><i class="fas fa-calendar-alt"></i> آخرین بروزرسانی: دی ۱۴۰۲</span>
-                <span><i class="fas fa-file-alt"></i> نسخه: ۲.۱.۴</span>
-            </div>
-        </div>
+        <!-- عنوان صفحه -->
+        <h1 class="page-title">📜 قوانین رسمی واحد Medic</h1>
+        <p style="text-align: center; color: #a5d8ff; margin-bottom: 40px; font-size: 1.1rem;">
+            لطفاً قبل از عضویت یا همکاری، این قوانین را به دقت مطالعه و تأیید کنید.
+        </p>
 
-        <div class="rules-content">
-            <!-- بخش ۱: قوانین عمومی -->
-            <section class="rule-section">
-                <h3><i class="fas fa-users"></i> قوانین عمومی</h3>
-                <div class="rule-list">
-                    <div class="rule-item">
-                        <h4><i class="fas fa-ban"></i> ممنوعیت‌ها</h4>
-                        <ul>
-                            <li>استفاده از چیت یا هک در حین خدمات‌رسانی ممنوع است</li>
-                            <li>ترک صحنه حادثه بدون دلیل موجه ممنوع است</li>
-                            <li>توهین به بیماران یا همکاران ممنوع است</li>
-                            <li>استفاده غیرمجاز از وسایل نقلیه Medic ممنوع است</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="rule-item">
-                        <h4><i class="fas fa-check-circle"></i> الزامات</h4>
-                        <ul>
-                            <li>همیشه یونیفرم مخصوص Medic را بپوشید</li>
-                            <li>در صحنه حادثه ابتدا خود را معرفی کنید</li>
-                            <li>گزارش هر مأموریت را در سیستم ثبت کنید</li>
-                            <li>وسایل و داروها را پس از استفاده بازگردانید</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- بخش ۲: پروتکل‌های درمان -->
-            <section class="rule-section">
-                <h3><i class="fas fa-heartbeat"></i> پروتکل‌های درمان</h3>
-                <div class="protocol-grid">
-                    <div class="protocol-card">
-                        <h4><i class="fas fa-car-crash"></i> تصادفات</h4>
-                        <p>۱. امنیت صحنه را برقرار کنید</p>
-                        <p>۲. وضعیت مصدومان را بررسی کنید</p>
-                        <p>۳. اولویت‌بندی درمان (Triage)</p>
-                        <p>۴. انتقال به بیمارستان</p>
-                    </div>
-                    
-                    <div class="protocol-card">
-                        <h4><i class="fas fa-user-injured"></i> زخم گلوله</h4>
-                        <p>۱. توقف خونریزی</p>
-                        <p>۲. بررسی علائم حیاتی</p>
-                        <p>۳> تزریق مورفین در صورت نیاز</p>
-                        <p>۴. انتقال سریع به بیمارستان</p>
-                    </div>
-                    
-                    <div class="protocol-card">
-                        <h4><i class="fas fa-procedures"></i> بیمارستان</h4>
-                        <p>۱. تحویل به بخش اورژانس</p>
-                        <p>۲. پرکردن فرم‌های پذیرش</p>
-                        <p>۳. هماهنگی با پزشک معالج</p>
-                        <p>۴. بازگشت به پایگاه</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- بخش ۳: سلسله مراتب -->
-            <section class="rule-section">
-                <h3><i class="fas fa-sitemap"></i> سلسله مراتب</h3>
-                <div class="hierarchy">
-                    <div class="rank">
-                        <h4><i class="fas fa-star"></i> مدیر Medic</h4>
-                        <p>مدیریت کلی واحد - تصمیم‌گیری نهایی</p>
-                    </div>
-                    
-                    <div class="rank">
-                        <h4><i class="fas fa-user-md"></i> ناظر ارشد</h4>
-                        <p>نظارت بر عملیات - آموزش پرسنل</p>
-                    </div>
-                    
-                    <div class="rank">
-                        <h4><i class="fas fa-ambulance"></i> پارامدیک</h4>
-                        <p>انجام مأموریت‌ها - درمان در صحنه</p>
-                    </div>
-                    
-                    <div class="rank">
-                        <h4><i class="fas fa-user-graduate"></i> کارآموز</h4>
-                        <p>آموزش - همراهی در مأموریت‌ها</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- بخش ۴: نحوه عضویت -->
-            <section class="rule-section">
-                <h3><i class="fas fa-clipboard-check"></i> نحوه عضویت</h3>
-                <div class="steps">
-                    <div class="step">
-                        <span class="step-number">۱</span>
-                        <h4>درخواست عضویت</h4>
-                        <p>از طریق سایت یا در بازی اقدام کنید</p>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">۲</span>
-                        <h4>مصاحبه رول پلی</h4>
-                        <p>ارزیابی مهارت‌های نقش‌آفرینی</p>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">۳</span>
-                        <h4>دوره آموزشی</h4>
-                        <p>آموزش پروتکل‌ها و قوانین</p>
-                    </div>
-                    
-                    <div class="step">
-                        <span class="step-number">۴</span>
-                        <h4>گواهینامه</h4>
-                        <p>دریافت مجوز و شروع فعالیت</p>
-                    </div>
+        <!-- بخش ۱: قوانین عمومی -->
+        <section class="rule-section">
+            <h3>👥 قوانین عمومی و اصول اخلاقی</h3>
+            <div class="rule-grid">
+                <div class="rule-card">
+                    <h4>✅ الزامات و بایدها</h4>
+                    <ul>
+                        <li>همیشه یونیفرم مخصوص Medic را بپوشید</li>
+                        <li>در صحنه حادثه ابتدا خود را معرفی کنید</li>
+                        <li>گزارش هر مأموریت را در سیستم ثبت کنید</li>
+                        <li>وسایل و داروها را پس از استفاده بازگردانید</li>
+                        <li>به حریم خصوصی بیماران احترام بگذارید</li>
+                    </ul>
                 </div>
                 
-                <div class="join-section">
-                    <p>آماده پیوستن به ما هستید؟</p>
-                    <button onclick="window.location.href='auth.html'" class="join-btn">
-                        <i class="fas fa-file-signature"></i> ثبت درخواست عضویت
-                    </button>
+                <div class="rule-card">
+                    <h4>❌ ممنوعیت‌ها و نبایدها</h4>
+                    <ul>
+                        <li>استفاده از چیت یا هک در حین خدمات‌رسانی</li>
+                        <li>ترک صحنه حادثه بدون دلیل موجه</li>
+                        <li>توهین یا تحقیر بیماران و همکاران</li>
+                        <li>استفاده غیرمجاز از وسایل نقلیه Medic</li>
+                        <li>درخواست پول یا خدمات غیرمرتبط</li>
+                    </ul>
                 </div>
-            </section>
+            </div>
+        </section>
+
+        <!-- بخش ۲: پروتکل‌های درمان -->
+        <section class="rule-section">
+            <h3>🩺 پروتکل‌های درمان و اورژانس</h3>
+            <div class="protocol-section">
+                <div class="protocol-card">
+                    <h4>🚗 پروتکل تصادفات</h4>
+                    <p>۱. تأمین امنیت صحنه (خطرات ثانویه)<br>
+                    ۲. بررسی وضعیت مصدومان (ABC)<br>
+                    ۳. اولویت‌بندی درمان (Triage)<br>
+                    ۴️. اقدامات اولیه پزشکی<br>
+                    ۵️. انتقال به بیمارستان مناسب</p>
+                </div>
+                
+                <div class="protocol-card">
+                    <h4>🔫 پروتکل تیراندازی</h4>
+                    <p>۱. توقف خونریزی (فشار مستقیم)<br>
+                    ۲. بررسی علائم حیاتی<br>
+                    ۳️. تزریق مورفین در صورت نیاز<br>
+                    ۴️. ثابت‌سازی ناحیه آسیب<br>
+                    ۵️. انتقال سریع به بیمارستان</p>
+                </div>
+                
+                <div class="protocol-card">
+                    <h4>💔 پروتکل حمله قلبی</h4>
+                    <p>۱. بررسی هوشیاری و تنفس<br>
+                    ۲️. CPR در صورت نیاز<br>
+                    ۳️. استفاده از دفیبریلاتور<br>
+                    ۴️. تجویز داروهای اضطراری<br>
+                    ۵️. انتقال با بالاترین اولویت</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش ۳: سلسله مراتب -->
+        <section class="rule-section">
+            <h3>🏛️ سلسله مراتب و مسئولیت‌ها</h3>
+            <div class="hierarchy">
+                <div class="rank-card">
+                    <h4>👑 مدیر Medic</h4>
+                    <p>• مدیریت کلی واحد<br>• تصمیم‌گیری نهایی<br>• هماهنگی با سرور</p>
+                </div>
+                
+                <div class="rank-card">
+                    <h4>🎓 ناظر ارشد</h4>
+                    <p>• نظارت بر عملیات<br>• آموزش پرسنل<br>• بررسی گزارش‌ها</p>
+                </div>
+                
+                <div class="rank-card">
+                    <h4>🚑 پارامدیک</h4>
+                    <p>• انجام مأموریت‌ها<br>• درمان در صحنه<br>• گزارش‌نویسی</p>
+                </div>
+                
+                <div class="rank-card">
+                    <h4>📚 کارآموز</h4>
+                    <p>• آموزش عملی<br>• همراهی در مأموریت‌ها<br>• یادگیری پروتکل‌ها</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش ۴: عضویت -->
+        <section class="rule-section">
+            <h3>📝 فرآیند عضویت در واحد Medic</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">1️⃣</div>
+                    <h4 style="color: #4dabf7;">درخواست عضویت</h4>
+                    <p>از طریق سایت یا در بازی</p>
+                </div>
+                
+                <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">2️⃣</div>
+                    <h4 style="color: #4dabf7;">مصاحبه رول پلی</h4>
+                    <p>ارزیابی مهارت‌های نقش‌آفرینی</p>
+                </div>
+                
+                <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">3️⃣</div>
+                    <h4 style="color: #4dabf7;">دوره آموزشی</h4>
+                    <p>آموزش پروتکل‌ها و قوانین</p>
+                </div>
+                
+                <div style="text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">4️⃣</div>
+                    <h4 style="color: #4dabf7;">گواهینامه</h4>
+                    <p>دریافت مجوز و شروع فعالیت</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش اقدام -->
+        <div class="join-section">
+            <h3 style="color: #51cf66; margin-bottom: 15px;">آماده پیوستن به ما هستید؟</h3>
+            <p style="margin-bottom: 20px; color: #a5d8ff;">با پذیرش قوانین، می‌توانید فرآیند عضویت را آغاز کنید.</p>
+            
+            <button class="join-btn" onclick="acceptRules()">
+                📝 پذیرش قوانین و شروع عضویت
+            </button>
+            
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #868e96;">
+                با کلیک بر روی دکمه، قوانین فوق را به طور کامل می‌پذیرید.
+            </p>
         </div>
 
-        <div class="rules-footer">
-            <div class="important-note">
-                <h4><i class="fas fa-exclamation-triangle"></i> نکته مهم</h4>
-                <p>تخلف از قوانین می‌تواند منجر به اخطار، تعلیق یا اخراج از واحد Medic شود. لطفاً قوانین را رعایت کنید.</p>
-            </div>
-            
-            <div class="rules-actions">
-                <button onclick="window.print()" class="action-btn">
-                    <i class="fas fa-print"></i> چاپ قوانین
-                </button>
-                <button onclick="window.location.href='index.html'" class="action-btn">
-                    <i class="fas fa-home"></i> بازگشت به خانه
-                </button>
-                <button onclick="confirmRules()" class="action-btn">
-                    <i class="fas fa-check"></i> تایید قوانین
-                </button>
-            </div>
+        <!-- دکمه‌های اقدام -->
+        <div class="rule-actions">
+            <button class="action-btn" onclick="window.print()">
+                🖨️ چاپ قوانین
+            </button>
+            <button class="action-btn" onclick="window.location.href='index.html'">
+                🏠 بازگشت به خانه
+            </button>
+            <button class="action-btn" onclick="scrollToTop()">
+                ⬆️ بازگشت به بالا
+            </button>
         </div>
     </main>
 
-    <footer>
-        <div class="footer-bottom">
-            <p>© 2024 واحد Medic - قوانین و مقررات</p>
-            <p class="dev-note">هرگونه کپی‌برداری از قوانین ممنوع است</p>
-        </div>
-    </footer>
-
     <script>
-        // تایید مطالعه قوانین
-        function confirmRules() {
-            const confirmed = confirm("آیا قوانین واحد Medic را به طور کامل مطالعه کرده‌اید و می‌پذیرید؟");
+        // تابع پذیرش قوانین
+        function acceptRules() {
+            const confirmed = confirm("آیا قوانین واحد Medic را به طور کامل مطالعه کرده‌اید و می‌پذیرید؟\n\nتخلف از قوانین می‌تواند منجر به اخطار، تعلیق یا اخراج شود.");
+            
             if (confirmed) {
-                alert("✅ قوانین با موفقیت تایید شد!\n\nمی‌توانید برای عضویت اقدام کنید.");
+                alert("✅ قوانین با موفقیت پذیرفته شد!\n\nاکنون می‌توانید برای عضویت اقدام کنید.");
+                // ذخیره در حافظه مرورگر
                 localStorage.setItem('medic_rules_accepted', 'true');
+                localStorage.setItem('rules_accepted_date', new Date().toLocaleDateString('fa-IR'));
+                
+                // هدایت به صفحه عضویت
                 window.location.href = 'auth.html';
             }
         }
         
-        // چک کن اگر قبلاً قوانین رو قبول کرده
+        // تابع بازگشت به بالا
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // چک کردن اگر قبلاً قوانین را پذیرفته
         window.onload = function() {
             if (localStorage.getItem('medic_rules_accepted') === 'true') {
-                console.log("کاربر قبلاً قوانین را پذیرفته است");
+                console.log("کاربر قبلاً قوانین را پذیرفته است.");
+                // می‌توانی یک نشان‌گر نمایش بدی
             }
+            
+            // تاریخ آخرین بروزرسانی
+            const updateDate = document.createElement('div');
+            updateDate.style.textAlign = 'center';
+            updateDate.style.marginTop = '30px';
+            updateDate.style.color = '#868e96';
+            updateDate.style.fontSize = '0.9rem';
+            updateDate.innerHTML = `📅 آخرین بروزرسانی قوانین: دی ۱۴۰۲ | نسخه ۲.۱`;
+            document.querySelector('.rules-container').appendChild(updateDate);
         };
     </script>
 </body>
