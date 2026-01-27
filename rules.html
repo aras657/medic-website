@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قوانین - واحد Medic</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1><i class="fas fa-book"></i> قوانین Medic</h1>
+            <p class="server-info">مقررات و دستورالعمل‌ها</p>
+        </div>
+        <nav>
+            <a href="index.html"><i class="fas fa-home"></i> خانه</a>
+            <a href="rules.html" class="active"><i class="fas fa-book"></i> قوانین</a>
+            <a href="auth.html"><i class="fas fa-sign-in-alt"></i> ورود</a>
+            <button onclick="window.location.href='index.html'" class="back-btn">
+                <i class="fas fa-arrow-right"></i> بازگشت
+            </button>
+        </nav>
+    </header>
+
+    <main class="rules-container">
+        <div class="rules-header">
+            <h2><i class="fas fa-gavel"></i> قوانین رسمی واحد Medic</h2>
+            <p>لطفاً قبل از عضویت یا همکاری، این قوانین را به دقت مطالعه کنید</p>
+            <div class="rules-meta">
+                <span><i class="fas fa-calendar-alt"></i> آخرین بروزرسانی: دی ۱۴۰۲</span>
+                <span><i class="fas fa-file-alt"></i> نسخه: ۲.۱.۴</span>
+            </div>
+        </div>
+
+        <div class="rules-content">
+            <!-- بخش ۱: قوانین عمومی -->
+            <section class="rule-section">
+                <h3><i class="fas fa-users"></i> قوانین عمومی</h3>
+                <div class="rule-list">
+                    <div class="rule-item">
+                        <h4><i class="fas fa-ban"></i> ممنوعیت‌ها</h4>
+                        <ul>
+                            <li>استفاده از چیت یا هک در حین خدمات‌رسانی ممنوع است</li>
+                            <li>ترک صحنه حادثه بدون دلیل موجه ممنوع است</li>
+                            <li>توهین به بیماران یا همکاران ممنوع است</li>
+                            <li>استفاده غیرمجاز از وسایل نقلیه Medic ممنوع است</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="rule-item">
+                        <h4><i class="fas fa-check-circle"></i> الزامات</h4>
+                        <ul>
+                            <li>همیشه یونیفرم مخصوص Medic را بپوشید</li>
+                            <li>در صحنه حادثه ابتدا خود را معرفی کنید</li>
+                            <li>گزارش هر مأموریت را در سیستم ثبت کنید</li>
+                            <li>وسایل و داروها را پس از استفاده بازگردانید</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش ۲: پروتکل‌های درمان -->
+            <section class="rule-section">
+                <h3><i class="fas fa-heartbeat"></i> پروتکل‌های درمان</h3>
+                <div class="protocol-grid">
+                    <div class="protocol-card">
+                        <h4><i class="fas fa-car-crash"></i> تصادفات</h4>
+                        <p>۱. امنیت صحنه را برقرار کنید</p>
+                        <p>۲. وضعیت مصدومان را بررسی کنید</p>
+                        <p>۳. اولویت‌بندی درمان (Triage)</p>
+                        <p>۴. انتقال به بیمارستان</p>
+                    </div>
+                    
+                    <div class="protocol-card">
+                        <h4><i class="fas fa-user-injured"></i> زخم گلوله</h4>
+                        <p>۱. توقف خونریزی</p>
+                        <p>۲. بررسی علائم حیاتی</p>
+                        <p>۳> تزریق مورفین در صورت نیاز</p>
+                        <p>۴. انتقال سریع به بیمارستان</p>
+                    </div>
+                    
+                    <div class="protocol-card">
+                        <h4><i class="fas fa-procedures"></i> بیمارستان</h4>
+                        <p>۱. تحویل به بخش اورژانس</p>
+                        <p>۲. پرکردن فرم‌های پذیرش</p>
+                        <p>۳. هماهنگی با پزشک معالج</p>
+                        <p>۴. بازگشت به پایگاه</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش ۳: سلسله مراتب -->
+            <section class="rule-section">
+                <h3><i class="fas fa-sitemap"></i> سلسله مراتب</h3>
+                <div class="hierarchy">
+                    <div class="rank">
+                        <h4><i class="fas fa-star"></i> مدیر Medic</h4>
+                        <p>مدیریت کلی واحد - تصمیم‌گیری نهایی</p>
+                    </div>
+                    
+                    <div class="rank">
+                        <h4><i class="fas fa-user-md"></i> ناظر ارشد</h4>
+                        <p>نظارت بر عملیات - آموزش پرسنل</p>
+                    </div>
+                    
+                    <div class="rank">
+                        <h4><i class="fas fa-ambulance"></i> پارامدیک</h4>
+                        <p>انجام مأموریت‌ها - درمان در صحنه</p>
+                    </div>
+                    
+                    <div class="rank">
+                        <h4><i class="fas fa-user-graduate"></i> کارآموز</h4>
+                        <p>آموزش - همراهی در مأموریت‌ها</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- بخش ۴: نحوه عضویت -->
+            <section class="rule-section">
+                <h3><i class="fas fa-clipboard-check"></i> نحوه عضویت</h3>
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-number">۱</span>
+                        <h4>درخواست عضویت</h4>
+                        <p>از طریق سایت یا در بازی اقدام کنید</p>
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">۲</span>
+                        <h4>مصاحبه رول پلی</h4>
+                        <p>ارزیابی مهارت‌های نقش‌آفرینی</p>
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">۳</span>
+                        <h4>دوره آموزشی</h4>
+                        <p>آموزش پروتکل‌ها و قوانین</p>
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">۴</span>
+                        <h4>گواهینامه</h4>
+                        <p>دریافت مجوز و شروع فعالیت</p>
+                    </div>
+                </div>
+                
+                <div class="join-section">
+                    <p>آماده پیوستن به ما هستید؟</p>
+                    <button onclick="window.location.href='auth.html'" class="join-btn">
+                        <i class="fas fa-file-signature"></i> ثبت درخواست عضویت
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div class="rules-footer">
+            <div class="important-note">
+                <h4><i class="fas fa-exclamation-triangle"></i> نکته مهم</h4>
+                <p>تخلف از قوانین می‌تواند منجر به اخطار، تعلیق یا اخراج از واحد Medic شود. لطفاً قوانین را رعایت کنید.</p>
+            </div>
+            
+            <div class="rules-actions">
+                <button onclick="window.print()" class="action-btn">
+                    <i class="fas fa-print"></i> چاپ قوانین
+                </button>
+                <button onclick="window.location.href='index.html'" class="action-btn">
+                    <i class="fas fa-home"></i> بازگشت به خانه
+                </button>
+                <button onclick="confirmRules()" class="action-btn">
+                    <i class="fas fa-check"></i> تایید قوانین
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>© 2024 واحد Medic - قوانین و مقررات</p>
+            <p class="dev-note">هرگونه کپی‌برداری از قوانین ممنوع است</p>
+        </div>
+    </footer>
+
+    <script>
+        // تایید مطالعه قوانین
+        function confirmRules() {
+            const confirmed = confirm("آیا قوانین واحد Medic را به طور کامل مطالعه کرده‌اید و می‌پذیرید؟");
+            if (confirmed) {
+                alert("✅ قوانین با موفقیت تایید شد!\n\nمی‌توانید برای عضویت اقدام کنید.");
+                localStorage.setItem('medic_rules_accepted', 'true');
+                window.location.href = 'auth.html';
+            }
+        }
+        
+        // چک کن اگر قبلاً قوانین رو قبول کرده
+        window.onload = function() {
+            if (localStorage.getItem('medic_rules_accepted') === 'true') {
+                console.log("کاربر قبلاً قوانین را پذیرفته است");
+            }
+        };
+    </script>
+</body>
+</html>

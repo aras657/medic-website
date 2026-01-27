@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود - Medic</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>🚑 صفحه ورود Medic</h1>
+            <p>لطفاً وارد شوید</p>
+        </div>
+        <nav>
+            <a href="index.html">🏠 بازگشت به خانه</a>
+        </nav>
+    </header>
+
+    <main style="padding: 50px 20px;">
+        <div class="box" style="max-width: 400px; margin: 0 auto;">
+            <h3>🔐 ورود به حساب</h3>
+            <p style="margin: 20px 0;">این بخش در حال توسعه است</p>
+            <button onclick="simulateLogin()" style="width: 100%; padding: 15px;">
+                🎮 ورود با حساب بازی
+            </button>
+            <br><br>
+            <button onclick="window.location.href='index.html'" 
+                    style="width: 100%; padding: 15px; background: #666;">
+                ↩️ بازگشت
+            </button>
+        </div>
+    </main>
+
+    <script>
+        function simulateLogin() {
+            var username = prompt("نام کاربری خود در بازی را وارد کنید:");
+            if (username) {
+                alert("خوش آمدید " + username + "!\n\nاین نسخه نمایشی است.\nسیستم واقعی به زودی اضافه می‌شود.");
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+</body>
+</html>
