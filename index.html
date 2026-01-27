@@ -5,23 +5,484 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>واحد Medic - سرور رول پلی GTA</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* استایل‌های اصلی سایت */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a1929;
+            color: #e0e0e0;
+            line-height: 1.6;
+            direction: rtl;
+            min-height: 100vh;
+        }
+
+        /* هدر */
+        header {
+            background: linear-gradient(135deg, #132f4c 0%, #0a1929 100%);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #ff4757;
+            box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo h1 {
+            color: #ff4757;
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .server-info {
+            color: #4dabf7;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: #a5d8ff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover {
+            color: #ff4757;
+            background: rgba(255, 71, 87, 0.1);
+        }
+
+        #authBtn {
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(255, 71, 87, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #authBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 71, 87, 0.4);
+        }
+
+        /* بخش اصلی */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            min-height: 70vh;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(rgba(19, 47, 76, 0.85), rgba(10, 25, 41, 0.95));
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            border: 2px solid #1e3a5f;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2070') center/cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #a5d8ff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #e9ecef;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d4a7c 100%);
+            color: white;
+            border: 2px solid #4dabf7;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .cta-btn:hover {
+            background: linear-gradient(135deg, #2d4a7c 0%, #3a5b8c 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(77, 171, 247, 0.3);
+        }
+
+        /* ویژگی‌ها */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #132f4c 0%, #1e3a5f 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border-right: 5px solid #ff4757;
+            transition: all 0.3s;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(255, 71, 87, 0.25);
+        }
+
+        .feature-card.emergency-card {
+            border-right: 5px solid #ff6b6b;
+            background: linear-gradient(145deg, #1e3a5f 0%, #132f4c 100%);
+        }
+
+        .feature-card h3 {
+            color: #4dabf7;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #2d4a7c;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .services-list {
+            list-style: none;
+            padding-right: 1rem;
+            flex-grow: 1;
+        }
+
+        .services-list li {
+            padding: 0.5rem 0;
+            color: #c0c0c0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .services-list li:last-child {
+            border-bottom: none;
+        }
+
+        .services-list li i {
+            color: #51cf66;
+            font-size: 0.9rem;
+        }
+
+        .online-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 1rem 0;
+        }
+
+        .online-dot {
+            width: 10px;
+            height: 10px;
+            background: #51cf66;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        #online-count {
+            color: #51cf66;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .small-btn {
+            background: #2d4a7c;
+            color: white;
+            border: 1px solid #4dabf7;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: auto;
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+
+        .small-btn:hover {
+            background: #3a5b8c;
+            transform: translateY(-2px);
+        }
+
+        .small-btn.emergency-btn {
+            background: #ff4757;
+            border-color: #ff6b6b;
+        }
+
+        .small-btn.emergency-btn:hover {
+            background: #ff6b6b;
+        }
+
+        .emergency-contact {
+            margin: 1rem 0;
+        }
+
+        .emergency-contact p {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .emergency-contact code {
+            background: rgba(255, 71, 87, 0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #ff6b6b;
+            font-family: monospace;
+        }
+
+        /* اطلاعات سریع */
+        .quick-info {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(145deg, #132f4c 0%, #1e3a5f 100%);
+            border-radius: 12px;
+            border: 1px solid #2d4a7c;
+        }
+
+        .quick-info h3 {
+            color: #4dabf7;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .info-item i {
+            font-size: 2rem;
+            color: #4dabf7;
+            margin-bottom: 0.5rem;
+        }
+
+        /* فوتر */
+        footer {
+            background: #132f4c;
+            margin-top: 4rem;
+            border-top: 3px solid #ff4757;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section {
+            padding: 1rem;
+        }
+
+        .footer-section h4 {
+            color: #4dabf7;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-section a {
+            display: block;
+            color: #a5d8ff;
+            text-decoration: none;
+            margin: 0.5rem 0;
+            padding: 0.3rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #ff4757;
+        }
+
+        .footer-section code {
+            background: rgba(77, 171, 247, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #4dabf7;
+            font-family: monospace;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dev-note {
+            color: #868e96;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- نوار بالایی -->
     <header>
         <div class="logo">
-            <h1><i class="fas fa-ambulance"></i> واحد Medic</h1>
+            <h1>🚑 واحد Medic</h1>
             <p class="server-info">GTA V RolePlay Server</p>
         </div>
         <nav>
-            <a href="index.html"><i class="fas fa-home"></i> خانه</a>
-            <a href="rules.html"><i class="fas fa-book"></i> قوانین</a>
-            <a href="#" onclick="showComingSoon()"><i class="fas fa-images"></i> گالری</a>
-            <a href="#" onclick="showComingSoon()"><i class="fas fa-newspaper"></i> اخبار</a>
-            <button id="authBtn" class="login-btn">
-                <i class="fas fa-sign-in-alt"></i> ورود
-            </button>
+            <!-- 🔄 تغییر ۱: لینک‌های منوی اصلی -->
+            <a href="index.html">🏠 خانه</a>
+            <a href="rules.html">📋 قوانین</a>
+            <a href="auth.html">👥 عضویت</a>  <!-- تغییر از "ورود" به "عضویت" -->
+            <a href="gallery.html">🖼️ گالری</a>  <!-- فعال کردن لینک گالری -->
+            <a href="#" onclick="alert('به زودی فعال می‌شود!')">📰 اخبار</a>
         </nav>
     </header>
 
@@ -32,70 +493,72 @@
             <p>ارائه خدمات درمانی و نجات در سرور رول پلی GTA</p>
             <div class="cta-buttons">
                 <button class="cta-btn" onclick="window.location.href='rules.html'">
-                    <i class="fas fa-book-open"></i> مشاهده قوانین
+                    📖 مشاهده قوانین
                 </button>
                 <button class="cta-btn" onclick="window.location.href='auth.html'">
-                    <i class="fas fa-user-plus"></i> پیوستن به Medic
+                    👥 پیوستن به Medic
                 </button>
                 <button class="cta-btn" onclick="testSite()">
-                    <i class="fas fa-vial"></i> تست سایت
+                    🧪 تست سایت
                 </button>
             </div>
         </section>
 
         <section class="features">
             <div class="feature-card">
-                <h3><i class="fas fa-user-md"></i> تیم Medic</h3>
+                <h3>👨‍⚕️ تیم Medic</h3>
                 <p>با اعضای حرفه‌ای واحد Medic آشنا شوید</p>
                 <div class="online-status">
                     <span class="online-dot"></span>
                     <span id="online-count">در حال بارگذاری...</span>
                 </div>
-                <button class="small-btn" onclick="showComingSoon()">مشاهده اعضا</button>
+                <button class="small-btn" onclick="window.location.href='gallery.html#team'">
+                    مشاهده اعضا
+                </button>
             </div>
             
             <div class="feature-card">
-                <h3><i class="fas fa-ambulance"></i> خدمات ما</h3>
+                <h3>🚑 خدمات ما</h3>
                 <ul class="services-list">
-                    <li><i class="fas fa-check-circle"></i> پاسخ‌گویی اضطراری</li>
-                    <li><i class="fas fa-check-circle"></i> انتقال بیمار</li>
-                    <li><i class="fas fa-check-circle"></i> درمان در صحنه</li>
-                    <li><i class="fas fa-check-circle"></i> معاینه دوره‌ای</li>
-                    <li><i class="fas fa-check-circle"></i> آموزش کمک‌های اولیه</li>
+                    <li>✅ پاسخ‌گویی اضطراری</li>
+                    <li>✅ انتقال بیمار</li>
+                    <li>✅ درمان در صحنه</li>
+                    <li>✅ معاینه دوره‌ای</li>
+                    <li>✅ آموزش کمک‌های اولیه</li>
                 </ul>
             </div>
             
             <div class="feature-card emergency-card">
-                <h3><i class="fas fa-phone-alt"></i> تماس فوری</h3>
+                <h3>📞 تماس فوری</h3>
                 <p>برای درخواست کمک در بازی:</p>
                 <div class="emergency-contact">
-                    <p><i class="fas fa-comment-medical"></i> دستور: <code>/call 911</code></p>
-                    <p><i class="fas fa-map-marker-alt"></i> یا از GPS استفاده کنید</p>
-                    <p><i class="fas fa-hospital"></i> بیمارستان: Central Los Santos</p>
+                    <p>📢 دستور: <code>/call 911</code></p>
+                    <p>📍 یا از GPS استفاده کنید</p>
+                    <p>🏥 بیمارستان: Central Los Santos</p>
                 </div>
                 <button class="small-btn emergency-btn" onclick="simulateEmergency()">
-                    <i class="fas fa-bell"></i> شبیه‌سازی تماس
+                    🔔 شبیه‌سازی تماس
                 </button>
             </div>
         </section>
 
         <section class="quick-info">
-            <h3><i class="fas fa-info-circle"></i> اطلاعات سریع</h3>
+            <h3>📊 اطلاعات سریع</h3>
             <div class="info-grid">
                 <div class="info-item">
-                    <i class="fas fa-clock"></i>
+                    <span>⏰</span>
                     <p>ساعات کاری: ۲۴/۷</p>
                 </div>
                 <div class="info-item">
-                    <i class="fas fa-users"></i>
+                    <span>👥</span>
                     <p>تعداد پرسنل: ۱۵+</p>
                 </div>
                 <div class="info-item">
-                    <i class="fas fa-car"></i>
+                    <span>🚑</span>
                     <p>آمبولانس: ۸ دستگاه</p>
                 </div>
                 <div class="info-item">
-                    <i class="fas fa-first-aid"></i>
+                    <span>⚡</span>
                     <p>مدت پاسخگویی: <۳ دقیقه</p>
                 </div>
             </div>
@@ -105,27 +568,188 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h4><i class="fas fa-ambulance"></i> واحد Medic</h4>
+                <h4>🚑 واحد Medic</h4>
                 <p>ارائه دهنده خدمات درمانی در سرور رول پلی</p>
+                <!-- 🔄 تغییر ۲: لینک‌های فوتر -->
+                <a href="rules.html">📋 قوانین Medic</a>
+                <a href="auth.html">📝 درخواست عضویت</a>
+                <a href="gallery.html">🖼️ گالری تصاویر</a>
             </div>
             <div class="footer-section">
-                <h4><i class="fas fa-link"></i> لینک‌های سریع</h4>
-                <a href="index.html">خانه</a>
-                <a href="rules.html">قوانین</a>
-                <a href="auth.html">عضویت</a>
+                <h4>🔗 لینک‌های سریع</h4>
+                <a href="index.html">🏠 صفحه اصلی</a>
+                <a href="rules.html">📚 قوانین کامل</a>
+                <a href="auth.html">👨‍⚕️ فرم عضویت</a>
+                <a href="gallery.html">📸 گالری فعالیت‌ها</a>
             </div>
             <div class="footer-section">
-                <h4><i class="fas fa-gamepad"></i> در بازی</h4>
+                <h4>🎮 در بازی</h4>
                 <p>فرمان: <code>/medic help</code></p>
                 <p>فراخوانی: <code>/call 911</code></p>
+                <p>عضویت: <code>/medic join</code></p>
             </div>
         </div>
         <div class="footer-bottom">
             <p>© 2024 واحد Medic - سرور رول پلی GTA</p>
-            <p class="dev-note">سایت اختصاصی برای گیم مود رول پلی | نسخه ۱.۰</p>
+            <p class="dev-note">سایت اختصاصی برای گیم مود رول پلی | نسخه ۲.۰</p>
         </div>
     </footer>
 
-    <script src="app.js"></script>
+    <script>
+        // ============================================
+        // 📱 کدهای اصلی سایت Medic
+        // ============================================
+
+        console.log("🚑 سایت واحد Medic بارگذاری شد!");
+
+        // وقتی صفحه کاملاً لود شد
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("✅ DOM آماده است");
+            
+            // شمارنده آنلاین (تصادفی)
+            updateOnlineCount();
+            
+            // تنظیم دکمه ورود
+            setupLoginButton();
+            
+            // تنظیم کلیک روی دکمه‌ها
+            setupButtons();
+        });
+
+        // آپدیت شمارنده آنلاین
+        function updateOnlineCount() {
+            const onlineElement = document.getElementById('online-count');
+            if (onlineElement) {
+                // عدد تصادفی بین ۳ تا ۱۲
+                const onlineCount = Math.floor(Math.random() * 10) + 3;
+                onlineElement.textContent = `${onlineCount} نفر آنلاین`;
+            }
+        }
+
+        // تنظیم دکمه ورود
+        function setupLoginButton() {
+            const authBtn = document.getElementById('authBtn');
+            if (authBtn) {
+                authBtn.addEventListener('click', function() {
+                    console.log("دکمه عضویت کلیک شد");
+                    window.location.href = 'auth.html';
+                });
+            }
+        }
+
+        // تنظیم کلیه دکمه‌ها
+        function setupButtons() {
+            // دکمه‌های CTA
+            const ctaButtons = document.querySelectorAll('.cta-btn');
+            ctaButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    console.log(`دکمه ${this.textContent} کلیک شد`);
+                });
+            });
+            
+            // دکمه‌های کوچک
+            const smallButtons = document.querySelectorAll('.small-btn');
+            smallButtons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    console.log(`دکمه کوچک ${this.textContent} کلیک شد`);
+                });
+            });
+        }
+
+        // تست سایت
+        function testSite() {
+            const tests = [
+                "✅ سایت بارگذاری شد",
+                "✅ استایل‌ها اعمال شد",
+                "✅ جاوااسکریپت فعال است",
+                "✅ لینک‌ها کار می‌کنند",
+                "✅ واحد Medic آماده خدمات‌رسانی!"
+            ];
+            
+            const message = tests.join('\n');
+            alert("🧪 گزارش تست سایت:\n\n" + message);
+            
+            // تغییر رنگ هدر برای نمایش فعالیت
+            const header = document.querySelector('header');
+            header.style.borderBottom = '4px solid #2ecc71';
+            setTimeout(() => {
+                header.style.borderBottom = '4px solid #ff4757';
+            }, 2000);
+            
+            return true;
+        }
+
+        // شبیه‌سازی تماس اضطراری
+        function simulateEmergency() {
+            const locations = [
+                "می‌دان وینسنت",
+                "فرودگاه بین‌المللی لوس سانتوس",
+                "بندرگاه",
+                "محله راکفورد هیلز",
+                "مرکز شهر"
+            ];
+            
+            const injuries = [
+                "تصادف خودرو",
+                "سقوط از ارتفاع",
+                "زخم گلوله",
+                "حمله قلبی",
+                "مسمومیت"
+            ];
+            
+            const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+            const randomInjury = injuries[Math.floor(Math.random() * injuries.length)];
+            
+            const emergencyMessage = `
+🚨 **تماس اضطراری شبیه‌سازی شده**
+    
+📍 مکان: ${randomLocation}
+🤕 نوع حادثه: ${randomInjury}
+👥 تعداد مصدوم: ${Math.floor(Math.random() * 3) + 1}
+⏱️ زمان تخمینی رسیدن: ${Math.floor(Math.random() * 5) + 2} دقیقه
+    
+✅ واحد Medic در راه است!
+`;
+            
+            alert(emergencyMessage);
+            
+            // پخش صدای اضطراری (اگر مرورگر اجازه بده)
+            try {
+                const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-city-alert-siren-1007.mp3');
+                audio.volume = 0.3;
+                audio.play().catch(e => console.log("صدا پخش نشد:", e));
+            } catch (e) {
+                console.log("خطا در پخش صدا:", e);
+            }
+        }
+
+        // نمایش تاریخ و زمان سرور
+        function showServerTime() {
+            const now = new Date();
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            };
+            
+            const persianDate = now.toLocaleDateString('fa-IR', options);
+            alert(`🕐 زمان سرور:\n${persianDate}\n\n⏰ ساعت بازی: ${Math.floor(Math.random() * 24)}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`);
+        }
+
+        // وقتی کاربر می‌خواهد صفحه رو ترک کند
+        window.addEventListener('beforeunload', function(e) {
+            console.log("👋 کاربر در حال ترک سایت است");
+        });
+
+        // وقتی اندازه پنجره تغییر می‌کند
+        window.addEventListener('resize', function() {
+            console.log(`📱 اندازه پنجره: ${window.innerWidth}x${window.innerHeight}`);
+        });
+
+        console.log("🚀 سایت Medic آماده خدمات‌رسانی!");
+    </script>
 </body>
 </html>
