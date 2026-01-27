@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گالری تصاویر - واحد Medic</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* استایل‌های مخصوص گالری */
+        body {
+            background: #0a1929;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #132f4c 0%, #0a1929 100%);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #ff4757;
+        }
+        
+        .logo h1 {
+            color: #ff4757;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        nav a {
+            color: #a5d8ff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 71, 87, 0.1);
+            color: #ff4757;
+        }
+        
+        .gallery-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            text-align: center;
+            color: #4dabf7;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            border-bottom: 3px solid #ff4757;
+            padding-bottom: 15px;
+        }
+        
+        .gallery-intro {
+            text-align: center;
+            color: #a5d8ff;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: #1e3a5f;
+            color: #a5d8ff;
+            border: 2px solid #2d4a7c;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: #2d4a7c;
+            color: #ff4757;
+            border-color: #ff4757;
+            transform: translateY(-3px);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        
+        .gallery-item {
+            background: linear-gradient(145deg, #132f4c 0%, #1e3a5f 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #2d4a7c;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            border-color: #ff4757;
+            box-shadow: 0 15px 30px rgba(255, 71, 87, 0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-info {
+            padding: 20px;
+        }
+        
+        .image-info h3 {
+            color: #4dabf7;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .image-info p {
+            color: #c0c0c0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .image-date {
+            color: #868e96;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .upload-section {
+            background: linear-gradient(145deg, #132f4c 0%, #1e3a5f 100%);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 60px;
+            border: 3px solid #51cf66;
+        }
+        
+        .upload-section h3 {
+            color: #51cf66;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .upload-btn {
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+        
+        .upload-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(81, 207, 102, 0.3);
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 5px solid white;
+            border-radius: 10px;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .category-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .category-btn {
+                width: 80%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر سایت -->
+    <header>
+        <div class="logo">
+            <h1>📸 گالری واحد Medic</h1>
+        </div>
+        <nav>
+            <a href="index.html">🏠 خانه</a>
+            <a href="rules.html">📋 قوانین</a>
+            <a href="auth.html">👥 عضویت</a>
+            <a href="gallery.html" style="color: #ff4757; background: rgba(255,71,87,0.1);">🖼️ گالری</a>
+            <a href="#" onclick="alert('به زودی فعال می‌شود!')">📰 اخبار</a>
+        </nav>
+    </header>
+
+    <main class="gallery-container">
+        <!-- عنوان صفحه -->
+        <h1 class="page-title">🖼️ گالری تصاویر واحد Medic</h1>
+        
+        <div class="gallery-intro">
+            <p>در این بخش می‌توانید تصاویر واقعی از فعالیت‌های واحد Medic در سرور رول‌پلی را مشاهده کنید. این عکس‌ها لحظات واقعی عملیات‌های نجات، تمرینات تیم و صحنه‌های رول‌پلی را ثبت کرده‌اند.</p>
+            <p>👨‍⚕️ <strong>اعضای Medic</strong> می‌توانند عکس‌های خود را برای قرارگیری در گالری ارسال کنند.</p>
+        </div>
+        
+        <!-- تب‌های دسته‌بندی -->
+        <div class="category-tabs">
+            <button class="category-btn active" onclick="filterGallery('all')">
+                📦 همه تصاویر
+            </button>
+            <button class="category-btn" onclick="filterGallery('operations')">
+                🚨 عملیات‌ها
+            </button>
+            <button class="category-btn" onclick="filterGallery('team')">
+                👥 تیم Medic
+            </button>
+            <button class="category-btn" onclick="filterGallery('vehicles')">
+                🚑 وسایل نقلیه
+            </button>
+            <button class="category-btn" onclick="filterGallery('training')">
+                🎓 آموزش‌ها
+            </button>
+        </div>
+        
+        <!-- گالری تصاویر -->
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- تصویر ۱ -->
+            <div class="gallery-item" data-category="operations">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="عملیات نجات تصادف" 
+                     onclick="openLightbox(this.src, 'عملیات نجات در میدان وینسنت')">
+                <div class="image-info">
+                    <h3>🚨 عملیات نجات تصادف</h3>
+                    <p>نجات مصدومان از یک تصادف زنجیره‌ای در میدان وینسنت. تیم Medic با ۳ آمبولانس در محل حاضر شد.</p>
+                    <div class="image-date">📅 ۱۵ دی ۱۴۰۲ | 📍 میدان وینسنت</div>
+                </div>
+            </div>
+            
+            <!-- تصویر ۲ -->
+            <div class="gallery-item" data-category="team">
+                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="تیم Medic" 
+                     onclick="openLightbox(this.src, 'تیم کامل Medic در پایگاه')">
+                <div class="image-info">
+                    <h3>👥 تیم کامل Medic</h3>
+                    <p>جمع‌آوری تیم Medic در پایگاه اصلی. از چپ: آراس (مدیر)، علی (ناظر)، رضا و محسن (پارامدیک).</p>
+                    <div class="image-date">📅 ۵ دی ۱۴۰۲ | 📍 پایگاه اصلی Medic</div>
+                </div>
+            </div>
+            
+            <!-- تصویر ۳ -->
+            <div class="gallery-item" data-category="vehicles">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="آمبولانس جدید" 
+                     onclick="openLightbox(this.src, 'آمبولانس جدید واحد Medic')">
+                <div class="image-info">
+                    <h3>🚑 آمبولانس جدید</h3>
+                    <p>آمبولانس جدید واحد Medic با تجهیزات کامل اورژانس. این خودرو قابلیت درمان در صحنه را دارد.</p>
+                    <div class="image-date">📅 ۲۲ آذر ۱۴۰۲ | 📍 گاراژ مرکزی</div>
+                </div>
+            </div>
+            
+            <!-- تصویر ۴ -->
+            <div class="gallery-item" data-category="training">
+                <img src="https://images.unsplash.com/photo-1584467735871-8db329481c62?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="تمرین CPR" 
+                     onclick="openLightbox(this.src, 'تمرین احیای قلبی ریوی (CPR)')">
+                <div class="image-info">
+                    <h3>🎓 تمرین احیای قلبی</h3>
+                    <p>جلسه آموزشی CPR برای اعضای جدید Medic. آموزش توسط ناظر ارشد واحد انجام شد.</p>
+                    <div class="image-date">📅 ۱۰ آذر ۱۴۰۲ | 📍 بیمارستان مرکزی</div>
+                </div>
+            </div>
+            
+            <!-- تصویر ۵ -->
+            <div class="gallery-item" data-category="operations">
+                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="حمل مصدوم" 
+                     onclick="openLightbox(this.src, 'حمل مصدوم از ساختمان نیمه‌ویران')">
+                <div class="image-info">
+                    <h3>🏗️ نجات از ارتفاع</h3>
+                    <p>عملیات نجات مصدوم از یک ساختمان نیمه‌ویران. تیم نجات ارتفاع واحد Medic در حال عمل.</p>
+                    <div class="image-date">📅 ۲۸ آبان ۱۴۰۲ | 📍 محله صنعتی</div>
+                </div>
+            </div>
+            
+            <!-- تصویر ۶ -->
+            <div class="gallery-item" data-category="team">
+                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                     alt="شیفت شب" 
+                     onclick="openLightbox(this.src, 'تیم شیفت شب Medic')">
+                <div class="image-info">
+                    <h3>🌙 تیم شیفت شب</h3>
+                    <p>تیم شیفت شب Medic در حال آماده‌باش در پایگاه. واحد Medic به صورت ۲۴ ساعته فعال است.</p>
+                    <div class="image-date">📅 ۱۵ آبان ۱۴۰۲ | 📍 پایگاه شبانه</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- بخش آپلود عکس -->
+        <div class="upload-section">
+            <h3>📤 عضو واحد Medic هستید و عکس دارید؟</h3>
+            <p>می‌توانید عکس‌های خود از فعالیت‌های رول‌پلی را برای قرارگیری در گالری ارسال کنید.</p>
+            
+            <button class="upload-btn" onclick="openUploadForm()">
+                📎 ارسال عکس به گالری
+            </button>
+            
+            <p style="margin-top: 15px; color: #868e96; font-size: 0.9rem;">
+                📝 عکس‌ها باید مرتبط با فعالیت‌های Medic باشند و کیفیت قابل قبولی داشته باشند.
+            </p>
+        </div>
+        
+        <!-- Lightbox برای نمایش عکس بزرگ -->
+        <div id="lightbox" class="lightbox">
+            <button class="close-btn" onclick="closeLightbox()">×</button>
+            <img id="lightbox-img" src="" alt="">
+            <div id="lightbox-caption" style="color: white; text-align: center; margin-top: 20px; font-size: 1.2rem;"></div>
+        </div>
+    </main>
+
+    <script>
+        // فیلتر کردن گالری بر اساس دسته‌بندی
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const buttons = document.querySelectorAll('.category-btn');
+            
+            // آپدیت دکمه‌های فعال
+            buttons.forEach(btn => {
+                if (btn.textContent.includes(category === 'all' ? 'همه' : 
+                    category === 'operations' ? 'عملیات' :
+                    category === 'team' ? 'تیم' :
+                    category === 'vehicles' ? 'وسایل' : 'آموزش')) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // نمایش/مخفی کردن آیتم‌ها
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+        
+        // باز کردن لایت‌باکس
+        function openLightbox(imageSrc, caption) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightboxImg.src = imageSrc;
+            lightboxCaption.textContent = caption;
+            lightbox.style.display = 'flex';
+            
+            // جلوگیری از اسکرول پس‌زمینه
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // بستن لایت‌باکس
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // بستن با کلیک خارج از عکس
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+        
+        // بستن با دکمه Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+        
+        // فرم آپلود عکس
+        function openUploadForm() {
+            const formHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: flex; justify-content: center; align-items: center;">
+                    <div style="background: #132f4c; padding: 30px; border-radius: 15px; width: 90%; max-width: 500px; border: 3px solid #4dabf7;">
+                        <h3 style="color: #4dabf7; text-align: center; margin-bottom: 20px;">📤 ارسال عکس به گالری</h3>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="color: #a5d8ff; display: block; margin-bottom: 8px;">🎮 نام کاربری شما:</label>
+                            <input type="text" id="uploaderName" placeholder="نام کاربری در بازی" style="width: 100%; padding: 12px; background: #0a1929; border: 2px solid #2d4a7c; border-radius: 8px; color: white;">
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="color: #a5d8ff; display: block; margin-bottom: 8px;">📝 توضیح عکس:</label>
+                            <textarea id="imageDescription" placeholder="مثال: عملیات نجات در فرودگاه" rows="3" style="width: 100%; padding: 12px; background: #0a1929; border: 2px solid #2d4a7c; border-radius: 8px; color: white; font-family: inherit;"></textarea>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="color: #a5d8ff; display: block; margin-bottom: 8px;">🏷️ دسته‌بندی:</label>
+                            <select id="imageCategory" style="width: 100%; padding: 12px; background: #0a1929; border: 2px solid #2d4a7c; border-radius: 8px; color: white;">
+                                <option value="operations">عملیات‌ها</option>
+                                <option value="team">تیم Medic</option>
+                                <option value="vehicles">وسایل نقلیه</option>
+                                <option value="training">آموزش‌ها</option>
+                            </select>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 30px;">
+                            <button onclick="submitUpload()" style="background: #51cf66; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer;">ارسال درخواست</button>
+                            <button onclick="closeUploadForm()" style="background: #ff6b6b; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer;">لغو</button>
+                        </div>
+                        
+                        <p style="color: #868e96; font-size: 0.9rem; text-align: center; margin-top: 20px;">
+                            🔔 پس از تأیید مدیریت، عکس شما در گالری قرار می‌گیرد.
+                        </p>
+                    </div>
+                </div>
+            `;
+            
+            const formDiv = document.createElement('div');
+            formDiv.innerHTML = formHTML;
+            formDiv.id = 'uploadForm';
+            document.body.appendChild(formDiv);
+        }
+        
+        // ارسال فرم آپلود
+        function submitUpload() {
+            const name = document.getElementById('uploaderName').value;
+            const desc = document.getElementById('imageDescription').value;
+            const category = document.getElementById('imageCategory').value;
+            
+            if (!name || !desc) {
+                alert('لطفاً نام کاربری و توضیح عکس را وارد کنید.');
+                return;
+            }
+            
+            // ذخیره درخواست در localStorage
+            const uploads = JSON.parse(localStorage.getItem('galleryUploads') || '[]');
+            const newUpload = {
+                name: name,
+                description: desc,
+                category: category,
+                date: new Date().toLocaleString('fa-IR'),
+                status: 'pending'
+            };
+            
+            uploads.push(newUpload);
+            localStorage.setItem('galleryUploads', JSON.stringify(uploads));
+            
+            alert(`✅ درخواست شما ثبت شد!\n\n📌 نام: ${name}\n📝 توضیح: ${desc}\n\n🔔 پس از بررسی مدیریت، عکس شما اضافه خواهد شد.`);
+            
+            closeUploadForm();
+        }
+        
+        // بستن فرم آپلود
+        function closeUploadForm() {
+            const form = document.getElementById('uploadForm');
+            if (form) {
+                form.remove();
+            }
+        }
+        
+        // بارگذاری اولیه
+        window.onload = function() {
+            // نمایش همه تصاویر
+            filterGallery('all');
+            
+            // نمایش تعداد آپلودهای در انتظار (برای مدیر)
+            const uploads = JSON.parse(localStorage.getItem('galleryUploads') || '[]');
+            const pending = uploads.filter(u => u.status === 'pending').length;
+            
+            if (pending > 0) {
+                console.log(`📬 ${pending} درخواست آپلود در انتظار بررسی`);
+            }
+        };
+    </script>
+</body>
+</html>
