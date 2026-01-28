@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحه پیدا نشد - واحد Medic</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 40px;
+            background: linear-gradient(145deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-radius: 20px;
+            border: 4px solid var(--accent-red);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            color: var(--accent-red);
+            text-shadow: 5px 5px 0 rgba(255, 71, 87, 0.2);
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+        }
+        
+        .error-message {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .error-btn {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #339af0 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            min-width: 180px;
+            justify-content: center;
+        }
+        
+        .error-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(77, 171, 247, 0.4);
+        }
+        
+        .error-btn-secondary {
+            background: linear-gradient(135deg, var(--bg-tertiary) 0%, #2d4a7c 100%);
+            border: 2px solid var(--accent-blue);
+        }
+        
+        .error-illustration {
+            margin: 30px 0;
+            font-size: 6rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .error-search {
+            margin: 30px 0;
+        }
+        
+        .error-search input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .error-search button {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #40c057 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .error-links {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .error-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .error-links a:hover {
+            color: var(--accent-red);
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 5rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .error-actions {
+                flex-direction: column;
+            }
+            
+            .error-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-illustration">🚑</div>
+        <h1 class="error-code">۴۰۴</h1>
+        <h2 class="error-title">صفحه مورد نظر پیدا نشد!</h2>
+        
+        <div class="error-message">
+            <p>متأسفیم، صفحه‌ای که به دنبال آن هستید وجود ندارد یا حذف شده است.</p>
+            <p>ممکن است آدرس را اشتباه وارد کرده باشید یا صفحه به آدرس دیگری منتقل شده باشد.</p>
+        </div>
+        
+        <div class="error-search">
+            <input type="text" id="searchInput" placeholder="🔍 در سایت جستجو کنید...">
+            <button onclick="searchSite()">جستجو</button>
+        </div>
+        
+        <div class="error-actions">
+            <a href="index.html" class="error-btn">
+                🏠 بازگشت به خانه
+            </a>
+            <a href="javascript:history.back()" class="error-btn error-btn-secondary">
+                ↩️ بازگشت به صفحه قبل
+            </a>
+        </div>
+        
+        <div class="error-links">
+            <a href="index.html">خانه</a>
+            <a href="rules.html">قوانین</a>
+            <a href="auth.html">عضویت</a>
+            <a href="gallery.html">گالری</a>
+            <a href="admin.html">پنل مدیریت</a>
+        </div>
+    </div>
+
+    <script>
+        // جستجو در سایت
+        function searchSite() {
+            const query = document.getElementById('searchInput').value;
+            if (query.trim()) {
+                // در حالت واقعی، اینجا جستجو انجام می‌شود
+                alert(`در حال جستجو برای: "${query}"\n\nاین قابلیت در نسخه بعدی اضافه خواهد شد.`);
+            }
+        }
+        
+        // بازگشت به خانه اگر 5 ثانیه بیکار بودیم
+        let inactivityTimer;
+        
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                if (confirm('به نظر می‌رسد بیکار هستید. آیا می‌خواهید به صفحه اصلی بازگردید؟')) {
+                    window.location.href = 'index.html';
+                }
+            }, 5000); // 5 ثانیه
+        }
+        
+        // ردیابی فعالیت کاربر
+        document.addEventListener('mousemove', resetInactivityTimer);
+        document.addEventListener('keypress', resetInactivityTimer);
+        document.addEventListener('click', resetInactivityTimer);
+        
+        // شروع تایمر
+        resetInactivityTimer();
+        
+        // اضافه کردن سیستم Medic
+        document.addEventListener('DOMContentLoaded', function() {
+            // اگر سیستم Medic موجود نیست، بارگذاری کنیم
+            if (!window.medicSystem && typeof medicSystem !== 'undefined') {
+                window.medicSystem = new medicSystem();
+            }
+            
+            // نمایش نوتیفیکیشن خوش‌آمد
+            setTimeout(() => {
+                if (window.medicSystem && window.medicSystem.notifications) {
+                    window.medicSystem.notifications.info(
+                        'صفحه مورد نظر شما پیدا نشد. می‌توانید از لینک‌های بالا استفاده کنید.',
+                        'صفحه ۴۰۴'
+                    );
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
