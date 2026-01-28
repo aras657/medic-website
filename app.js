@@ -1,227 +1,362 @@
-// ============================================
-// 📱 کدهای اصلی سایت Medic
-// ============================================
-
-console.log("🚑 سایت واحد Medic بارگذاری شد!");
-
-// وقتی صفحه کاملاً لود شد
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("✅ DOM آماده است");
-    
-    // شمارنده آنلاین (تصادفی)
-    updateOnlineCount();
-    
-    // تنظیم دکمه ورود
-    setupLoginButton();
-    
-    // تنظیم کلیک روی دکمه‌ها
-    setupButtons();
-    
-    // نمایش پیام خوش‌آمدگویی
-    setTimeout(showWelcomeMessage, 1000);
-});
-
-// ================= توابع اصلی =================
-
-// نمایش پیام خوش‌آمد
-function showWelcomeMessage() {
-    console.log("👋 خوش آمدید به واحد Medic!");
-    // می‌تونی این خط رو فعال کنی اگر می‌خواهی آلرت نشان بده
-    // alert("به سایت واحد Medic خوش آمدید!\n\nنسخه آزمایشی ۱.۰");
-}
-
-// آپدیت شمارنده آنلاین
-function updateOnlineCount() {
-    const onlineElement = document.getElementById('online-count');
-    if (onlineElement) {
-        // عدد تصادفی بین ۳ تا ۱۲
-        const onlineCount = Math.floor(Math.random() * 10) + 3;
-        onlineElement.textContent = `${onlineCount} نفر آنلاین`;
-        
-        // هر ۱۰ ثانیه آپدیت کن (برای نمایش پویا)
-        setInterval(() => {
-            const change = Math.random() > 0.5 ? 1 : -1;
-            const newCount = Math.max(3, onlineCount + change);
-            onlineElement.textContent = `${newCount} نفر آنلاین`;
-        }, 10000);
-    }
-}
-
-// تنظیم دکمه ورود
-function setupLoginButton() {
-    const authBtn = document.getElementById('authBtn');
-    if (authBtn) {
-        authBtn.addEventListener('click', function() {
-            console.log("دکمه ورود کلیک شد");
-            window.location.href = 'auth.html';
-        });
-    }
-}
-
-// تنظیم کلیه دکمه‌ها
-function setupButtons() {
-    // دکمه‌های CTA
-    const ctaButtons = document.querySelectorAll('.cta-btn');
-    ctaButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            console.log(`دکمه ${this.textContent} کلیک شد`);
-        });
-    });
-    
-    // دکمه‌های کوچک
-    const smallButtons = document.querySelectorAll('.small-btn');
-    smallButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            console.log(`دکمه کوچک ${this.textContent} کلیک شد`);
-        });
-    });
-}
-
-// ================= توابع کاربردی =================
-
-// تست سایت
-function testSite() {
-    const tests = [
-        "✅ سایت بارگذاری شد",
-        "✅ استایل‌ها اعمال شد",
-        "✅ جاوااسکریپت فعال است",
-        "✅ لینک‌ها کار می‌کنند",
-        "✅ واحد Medic آماده خدمات‌رسانی!"
-    ];
-    
-    const message = tests.join('\n');
-    alert("🧪 گزارش تست سایت:\n\n" + message);
-    
-    // تغییر رنگ هدر برای نمایش فعالیت
-    const header = document.querySelector('header');
-    header.style.borderBottom = '4px solid #2ecc71';
-    setTimeout(() => {
-        header.style.borderBottom = '4px solid #ff4757';
-    }, 2000);
-    
-    return true;
-}
-
-// نمایش پیام "در حال توسعه"
-function showComingSoon() {
-    const messages = [
-        "این بخش به زودی فعال می‌شود!",
-        "در حال توسعه... لطفاً صبر کنید",
-        "به زودی با امکانات کامل",
-        "آماده‌سازی بخش مورد نظر"
-    ];
-    
-    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-    alert(`🚧 ${randomMessage}\n\nنسخه بعدی: به‌زودی`);
-    return false;
-}
-
-// شبیه‌سازی تماس اضطراری
-function simulateEmergency() {
-    const locations = [
-        "می‌دان وینسنت",
-        "فرودگاه بین‌المللی لوس سانتوس",
-        "بندرگاه",
-        "محله راکفورد هیلز",
-        "مرکز شهر"
-    ];
-    
-    const injuries = [
-        "تصادف خودرو",
-        "سقوط از ارتفاع",
-        "زخم گلوله",
-        "حمله قلبی",
-        "مسمومیت"
-    ];
-    
-    const randomLocation = locations[Math.floor(Math.random() * locations.length)];
-    const randomInjury = injuries[Math.floor(Math.random() * injuries.length)];
-    
-    const emergencyMessage = `
-🚨 **تماس اضطراری شبیه‌سازی شده**
-    
-📍 مکان: ${randomLocation}
-🤕 نوع حادثه: ${randomInjury}
-👥 تعداد مصدوم: ${Math.floor(Math.random() * 3) + 1}
-⏱️ زمان تخمینی رسیدن: ${Math.floor(Math.random() * 5) + 2} دقیقه
-    
-✅ واحد Medic در راه است!
-`;
-    
-    alert(emergencyMessage);
-    
-    // پخش صدای اضطراری (اگر مرورگر اجازه بده)
-    try {
-        const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-city-alert-siren-1007.mp3');
-        audio.volume = 0.3;
-        audio.play().catch(e => console.log("صدا پخش نشد:", e));
-    } catch (e) {
-        console.log("خطا در پخش صدا:", e);
-    }
-}
-
-// تغییر وضعیت آنلاین (برای نمایش)
-function toggleOnlineStatus() {
-    const onlineElement = document.getElementById('online-count');
-    if (onlineElement) {
-        const currentText = onlineElement.textContent;
-        if (currentText.includes("آنلاین")) {
-            onlineElement.textContent = "آفلاین - در حال استراحت";
-            onlineElement.style.color = "#ff6b6b";
-        } else {
-            const onlineCount = Math.floor(Math.random() * 10) + 3;
-            onlineElement.textContent = `${onlineCount} نفر آنلاین`;
-            onlineElement.style.color = "#51cf66";
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عضویت در واحد Medic</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* استایل‌های مخصوص صفحه عضویت */
+        body {
+            background: #0a1929;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
         }
-    }
-}
+        
+        header {
+            background: linear-gradient(135deg, #132f4c 0%, #0a1929 100%);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #ff4757;
+        }
+        
+        .logo h1 {
+            color: #ff4757;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        nav a {
+            color: #a5d8ff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        nav a:hover {
+            background: rgba(255, 71, 87, 0.1);
+            color: #ff4757;
+        }
+        
+        .auth-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        
+        .auth-card {
+            background: linear-gradient(145deg, #132f4c 0%, #1e3a5f 100%);
+            padding: 40px 30px;
+            border-radius: 15px;
+            border-right: 5px solid #51cf66;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .auth-card h2 {
+            color: #4dabf7;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #a5d8ff;
+            margin-bottom: 8px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 14px;
+            background: #0a1929;
+            border: 2px solid #2d4a7c;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #4dabf7;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+        }
+        
+        .checkbox-group label {
+            margin: 0;
+            color: #c0c0c0;
+            font-size: 0.95rem;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #51cf66 0%, #40c057 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(81, 207, 102, 0.3);
+        }
+        
+        .form-note {
+            text-align: center;
+            color: #868e96;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .requirements {
+            background: rgba(255, 107, 107, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border-right: 4px solid #ff6b6b;
+            margin: 30px 0;
+        }
+        
+        .requirements h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .requirements ul {
+            list-style: none;
+            padding-right: 15px;
+        }
+        
+        .requirements li {
+            padding: 5px 0;
+            color: #c0c0c0;
+        }
+        
+        .requirements li:before {
+            content: "•";
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        
+        .status-message {
+            display: none;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .success {
+            background: rgba(81, 207, 102, 0.2);
+            color: #51cf66;
+            border: 1px solid #51cf66;
+        }
+        
+        .error {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .auth-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- هدر سایت -->
+    <header>
+        <div class="logo">
+            <h1>👨‍⚕️ عضویت در واحد Medic</h1>
+        </div>
+        <nav>
+            <a href="index.html">🏠 خانه</a>
+            <a href="rules.html">📋 قوانین</a>
+            <a href="auth.html" style="color: #ff4757; background: rgba(255,71,87,0.1);">👥 عضویت</a>
+            <a href="#" onclick="alert('به زودی فعال می‌شود!')">🖼️ گالری</a>
+        </nav>
+    </header>
 
-// نمایش تاریخ و زمان سرور
-function showServerTime() {
-    const now = new Date();
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    };
-    
-    const persianDate = now.toLocaleDateString('fa-IR', options);
-    alert(`🕐 زمان سرور:\n${persianDate}\n\n⏰ ساعت بازی: ${Math.floor(Math.random() * 24)}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`);
-}
+    <main class="auth-container">
+        <div class="auth-card">
+            <h2>📝 فرم درخواست عضویت</h2>
+            
+            <!-- بخش شرایط عضویت -->
+            <div class="requirements">
+                <h4>⚠️ شرایط لازم برای عضویت:</h4>
+                <ul>
+                    <li>حداقل ۱۵ ساعت فعالیت در سرور</li>
+                    <li>آشنایی با مکانیک‌های پایه بازی</li>
+                    <li>تعهد به رعایت قوانین رول‌پلی</li>
+                    <li>پذیرش کامل قوانین واحد Medic</li>
+                    <!-- خط "داشتن میکروفون و هدست" حذف شد -->
+                </ul>
+            </div>
+            
+            <!-- فرم عضویت -->
+            <form id="membershipForm">
+                <div class="form-group">
+                    <label for="gameUsername">🎮 نام کاربری در بازی</label>
+                    <input type="text" id="gameUsername" placeholder="مثال: Aras_IRL" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="discordId">💬 آی‌دی دیسکورد (اختیاری)</label>
+                    <input type="text" id="discordId" placeholder="مثال: aras657#1234">
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience">🎯 سطح تجربه رول‌پلی</label>
+                    <select id="experience" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="beginner">تازه‌کار (کمتر از ۱ ماه)</option>
+                        <option value="intermediate">متوسط (۱-۶ ماه)</option>
+                        <option value="advanced">پیشرفته (بیش از ۶ ماه)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="playTime">⏰ ساعات فعالیت در هفته</label>
+                    <select id="playTime" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="low">کمتر از ۱۰ ساعت</option>
+                        <option value="medium">۱۰-۲۰ ساعت</option>
+                        <option value="high">بیش از ۲۰ ساعت</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="whyJoin">❓ چرا می‌خواهید به واحد Medic بپیوندید؟</label>
+                    <textarea id="whyJoin" rows="4" placeholder="انگیزه و اهداف خود را شرح دهید..." style="width: 100%; padding: 14px; background: #0a1929; border: 2px solid #2d4a7c; border-radius: 8px; color: white; font-family: inherit;"></textarea>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="acceptRules" required>
+                    <label for="acceptRules">قوانین واحد Medic را مطالعه کرده‌ام و می‌پذیرم</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="acceptContact" required>
+                    <label for="acceptContact">می‌پذیرم که از طریق دیسکورد یا درون بازی با من تماس گرفته شود</label>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    📨 ارسال درخواست عضویت
+                </button>
+            </form>
+            
+            <!-- پیام وضعیت -->
+            <div id="statusMessage" class="status-message"></div>
+            
+            <div class="form-note">
+                <p>📞 پس از بررسی درخواست، از طریق دیسکورد یا درون بازی با شما اطلاع داده می‌شود.</p>
+                <p>⏳ زمان معمول بررسی: ۲۴ تا ۴۸ ساعت</p>
+                <!-- خط "🔗 برای پیگیری: به کانال دیسکورد واحد Medic مراجعه کنید" حذف شد -->
+            </div>
+        </div>
+    </main>
 
-// ================= رویدادهای صفحه =================
-
-// وقتی کاربر می‌خواهد صفحه رو ترک کند
-window.addEventListener('beforeunload', function(e) {
-    console.log("👋 کاربر در حال ترک سایت است");
-    // اینجا می‌تونی پیام ذخیره نشده‌ها رو چک کنی
-});
-
-// وقتی اندازه پنجره تغییر می‌کند
-window.addEventListener('resize', function() {
-    console.log(`📱 اندازه پنجره: ${window.innerWidth}x${window.innerHeight}`);
-});
-
-// ================= راهنمای توسعه =================
-/*
-برای توسعه بیشتر:
-
-۱. اضافه کردن Firebase:
-   - خطوط Firebase SDK را به index.html اضافه کنید
-   - کانفیگ پروژه خود را در app.js قرار دهید
-   - توابع احراز هویت را پیاده‌سازی کنید
-
-۲. اضافه کردن صفحات بیشتر:
-   - dashboard.html برای پنل کاربری
-   - profile.html برای پروفایل کاربران
-   - admin.html برای مدیریت
-
-۳. ارتباط با سرور بازی:
-   - WebSocket برای وضعیت زنده
-   - API برای دریافت اطلاعات پرسنل
-*/
-
-console.log("🚀 آماده برای توسعه بیشتر...");
+    <script>
+        // مدیریت ارسال فرم
+        document.getElementById('membershipForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // جلوگیری از بارگذاری مجدد صفحه
+            
+            // جمع‌آوری اطلاعات فرم
+            const application = {
+                gameUsername: document.getElementById('gameUsername').value,
+                discordId: document.getElementById('discordId').value,
+                experience: document.getElementById('experience').value,
+                playTime: document.getElementById('playTime').value,
+                whyJoin: document.getElementById('whyJoin').value,
+                timestamp: new Date().toLocaleString('fa-IR'),
+                status: 'pending'
+            };
+            
+            // اعتبارسنجی
+            if (!application.gameUsername) {
+                showMessage('لطفاً نام کاربری در بازی را وارد کنید.', 'error');
+                return;
+            }
+            
+            // ذخیره در localStorage (به عنوان پایگاه داده موقت)
+            const applications = JSON.parse(localStorage.getItem('medicApplications') || '[]');
+            applications.push(application);
+            localStorage.setItem('medicApplications', JSON.stringify(applications));
+            
+            // شماره درخواست
+            const requestNumber = applications.length;
+            
+            // نمایش پیام موفقیت
+            const successMsg = `
+                ✅ درخواست عضویت شما ثبت شد!<br><br>
+                🆔 <strong>شماره درخواست:</strong> MED-${requestNumber.toString().padStart(4, '0')}<br>
+                🎮 <strong>نام کاربری:</strong> ${application.gameUsername}<br>
+                📅 <strong>تاریخ ثبت:</strong> ${application.timestamp}<br><br>
+                🔔 به زودی از طریق دیسکورد یا درون بازی با شما
