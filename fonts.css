@@ -1,0 +1,267 @@
+/* 🎯 فونت‌های فارسی حرفه‌ای برای سایت Medic */
+@font-face {
+    font-family: 'IRANSansX';
+    src: url('https://cdn.fontcdn.ir/Font/Persian/IRANSansX/IRANSansX-Regular.woff2') format('woff2'),
+         url('https://cdn.fontcdn.ir/Font/Persian/IRANSansX/IRANSansX-Regular.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IRANSansX';
+    src: url('https://cdn.fontcdn.ir/Font/Persian/IRANSansX/IRANSansX-Medium.woff2') format('woff2'),
+         url('https://cdn.fontcdn.ir/Font/Persian/IRANSansX/IRANSansX-Medium.woff') format('woff');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'IRANSansX';
+    src: url('https://cdn.fontcdn.ir/Font/Persian/IRANSansX/IRANSansX-Bold.woff2') format('woff2'),
+         url('https://cdn.fontcdn.ir/Font/Persian/IRANSansX/IRANSansX-Bold.woff') format('woff');
+    font-weight: bold;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Dana';
+    src: url('https://cdn.fontcdn.ir/Font/Persian/Dana/Dana-Regular.woff2') format('woff2'),
+         url('https://cdn.fontcdn.ir/Font/Persian/Dana/Dana-Regular.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Dana';
+    src: url('https://cdn.fontcdn.ir/Font/Persian/Dana/Dana-Medium.woff2') format('woff2'),
+         url('https://cdn.fontcdn.ir/Font/Persian/Dana/Dana-Medium.woff') format('woff');
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Samim';
+    src: url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.woff2') format('woff2'),
+         url('https://cdn.fontcdn.ir/Font/Persian/Samim/Samim.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+/* تنظیمات کلی فونت */
+:root {
+    --font-primary: 'IRANSansX', 'Segoe UI', Tahoma, sans-serif;
+    --font-secondary: 'Dana', 'IRANSansX', sans-serif;
+    --font-accent: 'Samim', 'IRANSansX', sans-serif;
+    
+    /* سایزهای فونت */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 1.875rem;  /* 30px */
+    --text-4xl: 2.25rem;   /* 36px */
+    --text-5xl: 3rem;      /* 48px */
+    
+    /* ارتفاع خطوط */
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.625;
+    --leading-loose: 2;
+    
+    /* تراکم حروف */
+    --tracking-tighter: -0.05em;
+    --tracking-tight: -0.025em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.025em;
+    --tracking-wider: 0.05em;
+}
+
+/* اعمال فونت‌ها */
+body {
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+    letter-spacing: var(--tracking-tight);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* تیترها */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-secondary);
+    font-weight: bold;
+    line-height: var(--leading-tight);
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: var(--text-5xl);
+    letter-spacing: var(--tracking-tighter);
+}
+
+h2 {
+    font-size: var(--text-4xl);
+    letter-spacing: var(--tracking-tighter);
+}
+
+h3 {
+    font-size: var(--text-3xl);
+}
+
+h4 {
+    font-size: var(--text-2xl);
+}
+
+h5 {
+    font-size: var(--text-xl);
+}
+
+h6 {
+    font-size: var(--text-lg);
+}
+
+/* متن‌های خاص */
+.hero-title {
+    font-family: var(--font-accent);
+    font-weight: 500;
+    letter-spacing: var(--tracking-tight);
+}
+
+.card-title {
+    font-family: var(--font-secondary);
+    font-weight: 500;
+}
+
+.nav-link {
+    font-family: var(--font-primary);
+    font-weight: 500;
+}
+
+.btn {
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    letter-spacing: var(--tracking-wide);
+}
+
+/* متن‌های ریز */
+.text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--leading-tight);
+}
+
+.text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+}
+
+.text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--leading-relaxed);
+}
+
+.text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--leading-relaxed);
+}
+
+/* وزن‌های فونت */
+.font-light {
+    font-weight: 300;
+}
+
+.font-normal {
+    font-weight: normal;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.font-extrabold {
+    font-weight: 800;
+}
+
+/* استایل‌های متن */
+.text-gradient {
+    background: linear-gradient(135deg, var(--accent-red), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* جهت متن */
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* فواصل */
+.letter-spacing-tight {
+    letter-spacing: var(--tracking-tight);
+}
+
+.letter-spacing-wide {
+    letter-spacing: var(--tracking-wide);
+}
+
+/* ارتفاع خط */
+.leading-tight {
+    line-height: var(--leading-tight);
+}
+
+.leading-relaxed {
+    line-height: var(--leading-relaxed);
+}
+
+.leading-loose {
+    line-height: var(--leading-loose);
+}
+
+/* برای نمایش بهتر فارسی */
+.persian-text {
+    text-align: justify;
+    word-spacing: -0.1em;
+}
+
+.persian-number {
+    font-feature-settings: "ss01";
+}
+
+/* انیمیشن تایپ */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+.typing-animation {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end);
+}
