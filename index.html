@@ -3,859 +3,1549 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>واحد Medic - سرور رول پلی GTA</title>
+    <title>🚑 واحد Medic پیشرفته | سرور رول پلی GTA</title>
+    
+    <!-- فونت‌ها -->
+    <link rel="stylesheet" href="fonts.css">
+    
+    <!-- استایل اصلی -->
     <link rel="stylesheet" href="style.css">
+    
+    <!-- طراحی مدرن -->
+    <link rel="stylesheet" href="modern-design.css">
+    
+    <!-- انیمیشن‌ها -->
+    <link rel="stylesheet" href="animations.css">
+    
+    <!-- آیکون‌ها -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* استایل‌های اصلی سایت */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #0a1929;
-            color: #e0e0e0;
-            line-height: 1.6;
-            direction: rtl;
+        /* استایل‌های صفحه اصلی */
+        .page-wrapper {
             min-height: 100vh;
-        }
-
-        /* هدر */
-        header {
-            background: linear-gradient(135deg, #132f4c 0%, #0a1929 100%);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 4px solid #ff4757;
-            box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo h1 {
-            color: #ff4757;
-            font-size: 1.8rem;
-            margin-bottom: 0.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .server-info {
-            color: #4dabf7;
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-
-        nav {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
-
-        nav a {
-            color: #a5d8ff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        nav a:hover {
-            color: #ff4757;
-            background: rgba(255, 71, 87, 0.1);
-        }
-
-        #authBtn {
-            background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
-            color: white;
-            border: none;
-            padding: 0.7rem 1.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-            box-shadow: 0 4px 8px rgba(255, 71, 87, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        #authBtn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(255, 71, 87, 0.4);
-        }
-
-        /* بخش اصلی */
-        main {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            min-height: 70vh;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 4rem 1rem;
-            background: linear-gradient(rgba(19, 47, 76, 0.85), rgba(10, 25, 41, 0.95));
-            background-size: cover;
-            background-position: center;
-            border-radius: 15px;
-            margin-bottom: 3rem;
-            border: 2px solid #1e3a5f;
+            background: linear-gradient(135deg, #0a1929 0%, #132f4c 100%);
             position: relative;
             overflow: hidden;
         }
-
-        .hero::before {
+        
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* سکشن‌ها */
+        .section {
+            padding: 100px 20px;
+            position: relative;
+        }
+        
+        .section-light {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .section-dark {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* کارت‌های ویژه */
+        .premium-card {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.8), rgba(19, 47, 76, 0.9));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #a855f7, #ec4899, #ef4444);
+        }
+        
+        .premium-card .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3);
+        }
+        
+        /* استایل‌های خاص */
+        .medic-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        .medic-divider {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #ef4444, #0ea5e9);
+            border-radius: 2px;
+            margin: 30px 0;
+        }
+        
+        .medic-quote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: #94a3b8;
+            border-right: 4px solid #0ea5e9;
+            padding-right: 20px;
+            margin: 40px 0;
+            line-height: 1.8;
+        }
+        
+        /* شبکه‌بندی پیشرفته */
+        .grid-advanced {
+            display: grid;
+            gap: 40px;
+        }
+        
+        /* آمار زنده */
+        .live-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .live-stat {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .live-stat:hover {
+            transform: translateY(-10px);
+            border-color: #0ea5e9;
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+        }
+        
+        .live-stat .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #0ea5e9;
+        }
+        
+        .live-stat .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        
+        .live-stat .stat-label {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* تیم */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .team-member {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            border-color: #0ea5e9;
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+        }
+        
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid #0ea5e9;
+            padding: 4px;
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+        }
+        
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .member-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .member-role {
+            display: inline-block;
+            background: linear-gradient(135deg, #ef4444, #f97316);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .member-bio {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: #0ea5e9;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* گالری */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        .gallery-title {
+            color: white;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .gallery-date {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+        
+        /* CTA جدید */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(168, 85, 247, 0.1));
+            border-radius: 32px;
+            padding: 80px 40px;
+            text-align: center;
+            margin: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2070') center/cover;
-            opacity: 0.3;
+            background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
             z-index: -1;
         }
-
-        .hero h2 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            color: #a5d8ff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        
+        .cta-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff, #0ea5e9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: #e9ecef;
-            margin-bottom: 2rem;
+        
+        .cta-description {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
         }
-
-        .cta-buttons {
+        
+        /* تایمر */
+        .countdown {
             display: flex;
-            gap: 1.5rem;
             justify-content: center;
-            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
         }
-
-        .cta-btn {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d4a7c 100%);
-            color: white;
-            border: 2px solid #4dabf7;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+        
+        .countdown-item {
+            text-align: center;
         }
-
-        .cta-btn:hover {
-            background: linear-gradient(135deg, #2d4a7c 0%, #3a5b8c 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(77, 171, 247, 0.3);
-        }
-
-        /* ویژگی‌ها */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .feature-card {
-            background: linear-gradient(145deg, #132f4c 0%, #1e3a5f 100%);
-            padding: 2rem;
-            border-radius: 12px;
-            border-right: 5px solid #ff4757;
-            transition: all 0.3s;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(255, 71, 87, 0.25);
-        }
-
-        .feature-card h3 {
-            color: #4dabf7;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            border-bottom: 2px solid #2d4a7c;
-            padding-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .services-list {
-            list-style: none;
-            padding-right: 1rem;
-            flex-grow: 1;
-        }
-
-        .services-list li {
-            padding: 0.5rem 0;
-            color: #c0c0c0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .services-list li:last-child {
-            border-bottom: none;
-        }
-
-        .services-list li i {
-            color: #51cf66;
-            font-size: 0.9rem;
-        }
-
-        /* استایل‌های جدید برای بخش Medic پیشرفته */
-        .medic-info-card {
-            grid-column: span 2;
-            border-right: 5px solid #4dabf7;
-        }
-
-        .medic-status {
-            margin: 1.5rem 0;
-        }
-
-        .medic-member {
-            display: grid;
-            grid-template-columns: 2fr 1.5fr 1.5fr 1fr;
-            gap: 15px;
-            padding: 12px;
-            margin-bottom: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            align-items: center;
-            border-right: 3px solid transparent;
-            transition: all 0.3s;
-        }
-
-        .medic-member:hover {
+        
+        .countdown-number {
+            width: 80px;
+            height: 80px;
             background: rgba(255, 255, 255, 0.1);
-            transform: translateX(-5px);
-        }
-
-        .medic-member:nth-child(1) {
-            border-right-color: #ffd700; /* طلایی برای مدیر */
-            background: rgba(255, 215, 0, 0.05);
-        }
-
-        .medic-member:nth-child(2), .medic-member:nth-child(3) {
-            border-right-color: #4dabf7; /* آبی برای ناظران */
-            background: rgba(77, 171, 247, 0.05);
-        }
-
-        .medic-member:nth-child(4), .medic-member:nth-child(5) {
-            border-right-color: #51cf66; /* سبز برای پارامدیک‌ها */
-            background: rgba(81, 207, 102, 0.05);
-        }
-
-        .member-name {
-            font-weight: bold;
-            color: #e0e0e0;
-        }
-
-        .member-rank {
-            color: #a5d8ff;
-            font-size: 0.9rem;
+            border-radius: 16px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
         }
-
-        .member-duty {
-            font-size: 0.85rem;
-            padding: 3px 8px;
-            border-radius: 12px;
-            text-align: center;
+        
+        .countdown-label {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-
-        .member-duty-online {
-            background: rgba(81, 207, 102, 0.2);
-            color: #51cf66;
-            border: 1px solid #51cf66;
+        
+        /* نقشه */
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 40px 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-
-        .member-duty-resting {
-            background: rgba(255, 193, 7, 0.2);
-            color: #ffc107;
-            border: 1px solid #ffc107;
+        
+        /* چت زنده */
+        .live-chat {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
         }
-
-        .member-duty-offline {
-            background: rgba(255, 107, 107, 0.2);
-            color: #ff6b6b;
-            border: 1px solid #ff6b6b;
+        
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 10px;
         }
-
-        .member-level {
-            color: #ff6b6b;
-            font-size: 0.85rem;
-            text-align: center;
-            background: rgba(255, 107, 107, 0.1);
-            padding: 3px 8px;
-            border-radius: 8px;
+        
+        .chat-message {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.3s ease;
         }
-
-        .medic-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 2px solid #2d4a7c;
+        
+        .chat-message.admin {
+            border-right: 4px solid #0ea5e9;
         }
-
-        .stat-item {
+        
+        .chat-message.user {
+            border-right: 4px solid #22c55e;
+        }
+        
+        .chat-sender {
+            font-weight: 600;
+            color: #0ea5e9;
+            margin-bottom: 5px;
+        }
+        
+        .chat-text {
+            color: white;
+            line-height: 1.5;
+        }
+        
+        .chat-time {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 5px;
+            text-align: left;
+        }
+        
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 40px auto 0;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-        }
-
-        .status-active {
-            color: #51cf66;
-            font-weight: bold;
-        }
-
-        .medic-controls {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .refresh-btn {
-            background: #2d4a7c;
-            color: white;
-            border: 1px solid #4dabf7;
-            padding: 8px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .refresh-btn:hover {
-            background: #3a5b8c;
-        }
-
-        /* اطلاعات سریع */
-        .quick-info {
-            margin-top: 3rem;
-            padding: 2rem;
-            background: linear-gradient(145deg, #132f4c 0%, #1e3a5f 100%);
-            border-radius: 12px;
-            border: 1px solid #2d4a7c;
-        }
-
-        .quick-info h3 {
-            color: #4dabf7;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            display: flex;
             align-items: center;
-            gap: 10px;
+            transition: background 0.3s ease;
         }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .info-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .info-item:hover {
-            transform: translateY(-5px);
+        
+        .faq-question:hover {
             background: rgba(255, 255, 255, 0.1);
         }
-
-        .info-item i {
-            font-size: 2rem;
-            color: #4dabf7;
-            margin-bottom: 0.5rem;
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
         }
-
-        /* فوتر */
-        footer {
-            background: #132f4c;
-            margin-top: 4rem;
-            border-top: 3px solid #ff4757;
+        
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
         }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
         }
-
-        .footer-section {
-            padding: 1rem;
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
         }
-
-        .footer-section h4 {
-            color: #4dabf7;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+        
+        /* رتبه‌بندی */
+        .rating-stars {
             display: flex;
+            gap: 5px;
+            direction: ltr;
+        }
+        
+        .star {
+            font-size: 1.5rem;
+            color: #eab308;
+        }
+        
+        .rating-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            margin-right: 10px;
+        }
+        
+        /* نوتیفیکیشن‌های زنده */
+        .live-notifications {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        .notification {
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            animation: slideInLeft 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .notification.success {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+        
+        .notification.warning {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+        }
+        
+        .notification.error {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        /* مودال */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(10px);
         }
-
-        .footer-section a {
-            display: block;
-            color: #a5d8ff;
-            text-decoration: none;
-            margin: 0.5rem 0;
-            padding: 0.3rem 0;
-            transition: color 0.3s;
+        
+        .modal-content {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: zoomIn 0.3s ease;
         }
-
-        .footer-section a:hover {
-            color: #ff4757;
+        
+        /* اسکرول بار سفارشی */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .footer-section code {
-            background: rgba(77, 171, 247, 0.2);
-            padding: 2px 6px;
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 4px;
-            color: #4dabf7;
-            font-family: monospace;
         }
-
-        .footer-bottom {
-            text-align: center;
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            border-radius: 4px;
         }
-
-        .dev-note {
-            color: #868e96;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            font-style: italic;
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ef4444, #f97316);
         }
-
+        
+        /* افکت‌های ویژه */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(14, 165, 233, 0.5);
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-10px);
+        }
+        
+        .border-gradient {
+            border: 2px solid transparent;
+            background: linear-gradient(#0f172a, #0f172a) padding-box,
+                        linear-gradient(135deg, #0ea5e9, #8b5cf6) border-box;
+        }
+        
+        /* بخش‌های متحرک */
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
         /* ریسپانسیو */
         @media (max-width: 1024px) {
-            .medic-info-card {
-                grid-column: span 1;
+            .hero-title {
+                font-size: 3rem;
             }
             
-            .medic-member {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 8px;
+            .cta-title {
+                font-size: 2.5rem;
+            }
+            
+            .countdown-number {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
             }
         }
-
+        
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 1.5rem;
-                text-align: center;
+            .section {
+                padding: 60px 15px;
             }
             
-            nav {
-                flex-wrap: wrap;
-                justify-content: center;
+            .hero-title {
+                font-size: 2.5rem;
             }
             
-            .hero h2 {
+            .cta-title {
                 font-size: 2rem;
             }
             
-            .hero p {
-                font-size: 1.1rem;
+            .premium-card {
+                padding: 30px 20px;
             }
             
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .cta-btn {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .features {
+            .team-grid {
                 grid-template-columns: 1fr;
             }
             
-            .medic-member {
-                grid-template-columns: 1fr;
-            }
-            
-            .info-grid {
+            .live-stats {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
+            .countdown {
+                flex-wrap: wrap;
             }
         }
-
+        
         @media (max-width: 480px) {
-            .info-grid {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .live-stats {
                 grid-template-columns: 1fr;
             }
             
-            .medic-stats {
-                grid-template-columns: 1fr;
+            .cta-section {
+                padding: 40px 20px;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- نوار بالایی -->
-    <header>
-        <div class="logo">
-            <h1>🚑 واحد Medic</h1>
-            <p class="server-info">GTA V RolePlay Server</p>
-        </div>
-        <nav>
-            <a href="index.html">🏠 خانه</a>
-            <a href="rules.html">📋 قوانین</a>
-            <a href="auth.html">👥 عضویت</a>
-            <a href="gallery.html">🖼️ گالری</a>
-            <a href="#" onclick="alert('به زودی فعال می‌شود!')">📰 اخبار</a>
-        </nav>
-    </header>
-
-    <!-- محتوای اصلی -->
-    <main>
-        <section class="hero">
-            <h2>به سایت رسمی واحد Medic خوش آمدید</h2>
-            <p>ارائه خدمات درمانی و نجات در سرور رول پلی GTA</p>
-            <div class="cta-buttons">
-                <button class="cta-btn" onclick="window.location.href='rules.html'">
-                    📖 مشاهده قوانین
-                </button>
-                <button class="cta-btn" onclick="window.location.href='auth.html'">
-                    👥 پیوستن به Medic
-                </button>
-                <!-- دکمه "تست سایت" حذف شد -->
-            </div>
-        </section>
-
-        <section class="features">
-            <!-- کارت خدمات -->
-            <div class="feature-card">
-                <h3>🚑 خدمات Medic</h3>
-                <ul class="services-list">
-                    <li>✅ پاسخ‌گویی سریع</li>
-                    <li>✅ ریوایو کردن افراد در سریع‌ترین حالت</li>
-                    <li>✅ درمان در صحنه</li>
-                    <li>✅ Heal کردن بیمار</li>
-                    <!-- "آموزش کمک‌های اولیه" و "معاینه دوره‌ای" حذف شدند -->
-                </ul>
+    <!-- نورهای متحرک -->
+    <div class="particles-container">
+        <div class="light"></div>
+        <div class="light"></div>
+        <div class="light"></div>
+    </div>
+    
+    <!-- ذرات متحرک -->
+    <div class="floating-lights">
+        <div class="particle particle-small"></div>
+        <div class="particle particle-medium"></div>
+        <div class="particle particle-large"></div>
+    </div>
+    
+    <!-- هدر مدرن -->
+    <header class="modern-header animate-slide-in-down">
+        <div class="header-container">
+            <!-- لوگو -->
+            <div class="logo-container">
+                <div class="logo-icon animate-rotate">
+                    🚑
+                </div>
+                <div class="logo-text">
+                    <h1>واحد Medic</h1>
+                    <div class="tagline">ارائه خدمات درمانی حرفه‌ای در GTA RP</div>
+                </div>
             </div>
             
-            <!-- کارت Medic پیشرفته -->
-            <div class="feature-card medic-info-card">
-                <h3>👨‍⚕️ وضعیت پیشرفته واحد Medic</h3>
-                
-                <div class="medic-controls">
-                    <button class="refresh-btn" onclick="refreshMedicStatus()">
-                        🔄 به‌روزرسانی وضعیت
-                    </button>
-                    <button class="refresh-btn" onclick="window.location.href='auth.html'">
-                        📝 درخواست عضویت
-                    </button>
+            <!-- نویگیشن -->
+            <nav class="modern-nav">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>خانه</span>
+                    </a>
                 </div>
                 
-                <div class="medic-status" id="medicStatus">
-                    <!-- اطلاعات Medic اینجا لود می‌شود -->
+                <div class="nav-item">
+                    <a href="rules.html" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        <span>قوانین</span>
+                    </a>
                 </div>
                 
-                <div class="medic-stats">
+                <div class="nav-item">
+                    <a href="auth.html" class="nav-link">
+                        <i class="fas fa-user-plus"></i>
+                        <span>عضویت</span>
+                        <span class="badge">جدید</span>
+                    </a>
+                </div>
+                
+                <div class="nav-item">
+                    <a href="gallery.html" class="nav-link">
+                        <i class="fas fa-images"></i>
+                        <span>گالری</span>
+                    </a>
+                </div>
+                
+                <div class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-newspaper"></i>
+                        <span>اخبار</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <!-- دکمه‌های اکشن -->
+            <div class="header-actions">
+                <button class="btn-secondary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    ورود
+                </button>
+                <button class="btn-cta">
+                    <i class="fas fa-ambulance"></i>
+                    درخواست کمک فوری
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- محتوای اصلی -->
+    <main class="content-wrapper">
+        <!-- سکشن هیرو -->
+        <section class="modern-hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content animate-fade-in-up">
+                <div class="medic-badge animate-pulse">🚑 سرویس ۲۴ ساعته</div>
+                
+                <h1 class="hero-title animate-fade-in-up delay-200">
+                    واحد <span class="text-gradient">Medic</span> پیشرفته
+                </h1>
+                
+                <p class="hero-subtitle animate-fade-in-up delay-400">
+                    ارائه خدمات درمانی و نجات حرفه‌ای در سرور رول پلی GTA.
+                    با تیم مجهز و آموزش دیده ما، امنیت شما تضمین شده است.
+                </p>
+                
+                <!-- آمار زنده -->
+                <div class="hero-stats animate-fade-in-up delay-600">
                     <div class="stat-item">
-                        <span>📊 وضعیت واحد:</span>
-                        <span class="status-active" id="unitStatus">فعال و عملیاتی</span>
+                        <div class="stat-number">۱۵+</div>
+                        <div class="stat-label">پرسنل فعال</div>
                     </div>
+                    
                     <div class="stat-item">
-                        <span>👥 پرسنل حاضر:</span>
-                        <span id="activePersonnel">در حال بارگذاری...</span>
+                        <div class="stat-number">۲۴/۷</div>
+                        <div class="stat-label">سرویس دهی</div>
                     </div>
+                    
                     <div class="stat-item">
-                        <span>🚑 آمبولانس‌های فعال:</span>
-                        <span id="activeAmbulances">در حال بارگذاری...</span>
+                        <div class="stat-number">۹۸%</div>
+                        <div class="stat-label">رضایت کاربران</div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-number">۲.۵</div>
+                        <div class="stat-label">میانگین پاسخ (دقیقه)</div>
+                    </div>
+                </div>
+                
+                <!-- دکمه‌های اکشن -->
+                <div class="hero-actions animate-fade-in-up delay-800">
+                    <button class="btn-modern btn-primary btn-lg hover-lift">
+                        <i class="fas fa-user-plus"></i>
+                        عضویت در Medic
+                    </button>
+                    
+                    <button class="btn-modern btn-secondary btn-lg hover-lift">
+                        <i class="fas fa-play-circle"></i>
+                        تماشای ویدیو معرفی
+                    </button>
+                    
+                    <button class="btn-modern btn-outline btn-lg hover-lift">
+                        <i class="fas fa-comments"></i>
+                        مشاوره رایگان
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- سکشن ویژگی‌ها -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-title animate-fade-in-up">
+                    <h2>✨ چرا واحد Medic؟</h2>
+                    <p>با ویژگی‌های منحصر به فرد ما آشنا شوید</p>
+                    <div class="medic-divider"></div>
+                </div>
+                
+                <div class="grid-modern grid-cols-3">
+                    <!-- کارت ۱ -->
+                    <div class="modern-card animate-fade-in-up delay-100">
+                        <div class="card-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="card-title">پاسخگویی سریع</h3>
+                        <p class="card-content">
+                            تیم ما در کمتر از ۲.۵ دقیقه در صحنه حاضر می‌شود.
+                            از طریق سیستم ردیابی پیشرفته، نزدیک‌ترین آمبولانس را به شما می‌فرستیم.
+                        </p>
+                        <div class="card-footer">
+                            <a href="#" class="feature-link">
+                                بیشتر بدانید
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت ۲ -->
+                    <div class="modern-card animate-fade-in-up delay-200">
+                        <div class="card-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3 class="card-title">پرسنل مجرب</h3>
+                        <p class="card-content">
+                            تمامی پرسنل ما دوره‌های تخصصی را گذرانده‌اند.
+                            دارای گواهینامه‌های معتبر درمان و نجات هستند.
+                        </p>
+                        <div class="card-footer">
+                            <a href="#" class="feature-link">
+                                مشاهده تیم
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- کارت ۳ -->
+                    <div class="modern-card animate-fade-in-up delay-300">
+                        <div class="card-icon">
+                            <i class="fas fa-ambulance"></i>
+                        </div>
+                        <h3 class="card-title">تجهیزات کامل</h3>
+                        <p class="card-content">
+                            آمبولانس‌های مجهز به آخرین تجهیزات پزشکی.
+                            امکان درمان در صحنه و انتقال امن به بیمارستان.
+                        </p>
+                        <div class="card-footer">
+                            <a href="#" class="feature-link">
+                                گالری تجهیزات
+                                <i class="fas fa-arrow-left"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section class="quick-info">
-            <h3>📊 آمار سریع واحد Medic</h3>
-            <div class="info-grid">
-                <div class="info-item">
-                    <span>⏰</span>
-                    <p>ساعات کاری: ۲۴/۷</p>
+        
+        <!-- سکشن آمار زنده -->
+        <section class="section section-dark">
+            <div class="container">
+                <div class="section-title animate-fade-in-up">
+                    <h2>📊 آمار زنده واحد</h2>
+                    <p>آمار لحظه‌ای فعالیت‌های Medic</p>
+                    <div class="medic-divider"></div>
                 </div>
-                <div class="info-item">
-                    <span>👥</span>
-                    <p>تعداد کل پرسنل: ۱۵+</p>
+                
+                <div class="live-stats">
+                    <div class="live-stat animate-fade-in-up delay-100">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number" id="onlineCount">۱۲</div>
+                        <div class="stat-label">پرسنل آنلاین</div>
+                    </div>
+                    
+                    <div class="live-stat animate-fade-in-up delay-200">
+                        <div class="stat-icon">
+                            <i class="fas fa-ambulance"></i>
+                        </div>
+                        <div class="stat-number" id="activeAmbulances">۵</div>
+                        <div class="stat-label">آمبولانس فعال</div>
+                    </div>
+                    
+                    <div class="live-stat animate-fade-in-up delay-300">
+                        <div class="stat-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="stat-number" id="todayMissions">۴۷</div>
+                        <div class="stat-label">ماموریت امروز</div>
+                    </div>
+                    
+                    <div class="live-stat animate-fade-in-up delay-400">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-number" id="successRate">۹۸%</div>
+                        <div class="stat-label">نرخ موفقیت</div>
+                    </div>
                 </div>
-                <div class="info-item">
-                    <span>🚑</span>
-                    <p>آمبولانس کل: ۸ دستگاه</p>
+                
+                <!-- نمودار -->
+                <div class="modern-card animate-fade-in-up delay-500" style="margin-top: 40px;">
+                    <h3 class="card-title">📈 نمودار فعالیت ماهانه</h3>
+                    <div id="activityChart" class="simple-chart" style="height: 200px; margin-top: 20px;"></div>
                 </div>
-                <div class="info-item">
-                    <span>⚡</span>
-                    <p>میانگین پاسخگویی: ۲.۵ دقیقه</p>
+            </div>
+        </section>
+        
+        <!-- سکشن تیم -->
+        <section class="section">
+            <div class="container">
+                <div class="section-title animate-fade-in-up">
+                    <h2>👥 تیم حرفه‌ای Medic</h2>
+                    <p>با اعضای تیم ما آشنا شوید</p>
+                    <div class="medic-divider"></div>
+                </div>
+                
+                <div class="team-grid">
+                    <!-- عضو ۱ -->
+                    <div class="team-member animate-fade-in-up">
+                        <div class="member-avatar">
+                            <img src="https://i.pravatar.cc/150?img=1" alt="دکتر آراس">
+                        </div>
+                        <h3 class="member-name">دکتر آراس</h3>
+                        <div class="member-role">مدیر ارشد</div>
+                        <p class="member-bio">
+                            با ۵ سال تجربه در رول پلی پزشکی.
+                            مدیریت تیم ۱۵ نفره Medic.
+                        </p>
+                        <div class="member-social">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- عضو ۲ -->
+                    <div class="team-member animate-fade-in-up delay-100">
+                        <div class="member-avatar">
+                            <img src="https://i.pravatar.cc/150?img=2" alt="پارامدیک علی">
+                        </div>
+                        <h3 class="member-name">پارامدیک علی</h3>
+                        <div class="member-role">ناظر ارشد</div>
+                        <p class="member-bio">
+                            متخصص عملیات‌های اضطراری.
+                            آموزش‌دهنده تیم‌های نجات.
+                        </p>
+                        <div class="member-social">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- عضو ۳ -->
+                    <div class="team-member animate-fade-in-up delay-200">
+                        <div class="member-avatar">
+                            <img src="https://i.pravatar.cc/150?img=3" alt="اکبر آمبولانس">
+                        </div>
+                        <h3 class="member-name">اکبر آمبولانس</h3>
+                        <div class="member-role">راننده حرفه‌ای</div>
+                        <p class="member-bio">
+                            راننده آمبولانس با رکورد سریع‌ترین زمان.
+                            متخصص رانندگی در شرایط سخت.
+                        </p>
+                        <div class="member-social">
+                            <a href="#" class="social-icon">
+                                <i class="fab fa-discord"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- سکشن CTA -->
+        <section class="cta-section animate-fade-in-up">
+            <div class="container">
+                <h2 class="cta-title">آماده پیوستن به ما هستید؟</h2>
+                <p class="cta-description">
+                    برای عضویت در واحد Medic، شرایط لازم را داشته باشید و فرم درخواست را پر کنید.
+                    تیم ما در کمتر از ۲۴ ساعت با شما تماس خواهد گرفت.
+                </p>
+                
+                <!-- تایمر -->
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">۰</div>
+                        <div class="countdown-label">روز</div>
+                    </div>
+                    
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">۰</div>
+                        <div class="countdown-label">ساعت</div>
+                    </div>
+                    
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">۰</div>
+                        <div class="countdown-label">دقیقه</div>
+                    </div>
+                    
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">۰</div>
+                        <div class="countdown-label">ثانیه</div>
+                    </div>
+                </div>
+                
+                <div class="hero-actions">
+                    <button class="btn-modern btn-primary btn-lg hover-lift">
+                        <i class="fas fa-file-signature"></i>
+                        پر کردن فرم عضویت
+                    </button>
+                    
+                    <button class="btn-modern btn-secondary btn-lg hover-lift">
+                        <i class="fas fa-question-circle"></i>
+                        شرایط عضویت
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- سکشن FAQ -->
+        <section class="section section-light">
+            <div class="container">
+                <div class="section-title animate-fade-in-up">
+                    <h2>❓ سوالات متداول</h2>
+                    <p>پاسخ به سوالات پرتکرار</p>
+                    <div class="medic-divider"></div>
+                </div>
+                
+                <div class="faq-container">
+                    <!-- سوال ۱ -->
+                    <div class="faq-item animate-fade-in-up">
+                        <div class="faq-question">
+                            <span>شرایط عضویت در واحد Medic چیست؟</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>• حداقل ۱۵ ساعت فعالیت در سرور<br>
+                               • آشنایی با مکانیک‌های پایه بازی<br>
+                               • تعهد به رعایت قوانین رول‌پلی<br>
+                               • پذیرش کامل قوانین واحد Medic</p>
+                        </div>
+                    </div>
+                    
+                    <!-- سوال ۲ -->
+                    <div class="faq-item animate-fade-in-up delay-100">
+                        <div class="faq-question">
+                            <span>زمان پاسخگویی تیم چقدر است؟</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>میانگین زمان پاسخگویی تیم Medic حدود ۲.۵ دقیقه است.
+                               در ساعات شلوغی ممکن است این زمان تا ۵ دقیقه افزایش یابد.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- سوال ۳ -->
+                    <div class="faq-item animate-fade-in-up delay-200">
+                        <div class="faq-question">
+                            <span>آیا خدمات رایگان است؟</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>بله، تمام خدمات واحد Medic به صورت کاملاً رایگان ارائه می‌شود.
+                               ما برای خدمت‌رسانی به جامعه بازی‌گران فعالیت می‌کنیم.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- سوال ۴ -->
+                    <div class="faq-item animate-fade-in-up delay-300">
+                        <div class="faq-question">
+                            <span>چطور می‌توانم درخواست کمک کنم؟</span>
+                            <i class="fas fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>• استفاده از دستور /call 911 در بازی<br>
+                               • تماس از طریق کانال دیسکورد<br>
+                               • استفاده از دکمه درخواست کمک در وبسایت</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-
-    <footer>
+    
+    <!-- فوتر -->
+    <footer class="modern-footer">
         <div class="footer-content">
+            <!-- ستون ۱ -->
             <div class="footer-section">
-                <h4>🚑 واحد Medic</h4>
-                <p>ارائه دهنده خدمات درمانی در سرور رول پلی</p>
-                <a href="rules.html">📋 قوانین Medic</a>
-                <a href="auth.html">📝 درخواست عضویت</a>
-                <a href="gallery.html">🖼️ گالری تصاویر</a>
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">
+                        🚑
+                    </div>
+                    <div class="footer-logo-text">
+                        <h3>واحد Medic</h3>
+                    </div>
+                </div>
+                <p class="footer-about">
+                    ارائه‌دهنده خدمات درمانی و نجات در سرور رول پلی GTA.
+                    با بیش از ۳ سال سابقه و تیم حرفه‌ای.
+                </p>
+                
+                <div class="rating-stars" style="margin-top: 20px;">
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="rating-value">۵.۰</span>
+                </div>
             </div>
+            
+            <!-- ستون ۲ -->
             <div class="footer-section">
-                <h4>🔗 لینک‌های سریع</h4>
-                <a href="index.html">🏠 صفحه اصلی</a>
-                <a href="rules.html">📚 قوانین کامل</a>
-                <a href="auth.html">👨‍⚕️ فرم عضویت</a>
-                <a href="gallery.html">📸 گالری فعالیت‌ها</a>
+                <h4>لینک‌های سریع</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-home"></i> صفحه اصلی</a></li>
+                    <li><a href="rules.html"><i class="fas fa-book"></i> قوانین کامل</a></li>
+                    <li><a href="auth.html"><i class="fas fa-user-plus"></i> فرم عضویت</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-images"></i> گالری فعالیت‌ها</a></li>
+                    <li><a href="#"><i class="fas fa-newspaper"></i> اخبار و رویدادها</a></li>
+                </ul>
             </div>
+            
+            <!-- ستون ۳ -->
             <div class="footer-section">
-                <h4>🎮 فرمان‌های درون بازی</h4>
-                <p>درخواست Medic: <code>/call 911</code></p>
-                <p>اطلاعات Medic: <code>/medic info</code></p>
-                <p>عضویت در Medic: <code>/medic join</code></p>
+                <h4>ارتباط با ما</h4>
+                <div class="footer-contact">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">کانال دیسکورد</div>
+                            <div style="color: #94a3b8; font-size: 0.875rem;">discord.gg/medic</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">ایمیل</div>
+                            <div style="color: #94a3b8; font-size: 0.875rem;">contact@medic-rp.com</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">پشتیبانی</div>
+                            <div style="color: #94a3b8; font-size: 0.875rem;">۲۴ ساعته</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <p>© 2024 واحد Medic - سرور رول پلی GTA</p>
-            <p class="dev-note">سیستم پیشرفته ردیابی وضعیت پرسنل | نسخه ۲.۱</p>
+            <div class="footer-social">
+                <a href="#" class="social-link">
+                    <i class="fab fa-discord"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            
+            <div class="copyright">
+                © ۲۰۲۴ واحد Medic - سرور رول پلی GTA. تمام حقوق محفوظ است.
+                <br>
+                <small>طراحی و توسعه توسط تیم فنی Medic</small>
+            </div>
         </div>
     </footer>
-
+    
+    <!-- نوتیفیکیشن‌های زنده -->
+    <div class="live-notifications">
+        <!-- نوتیفیکیشن‌ها به صورت پویا اضافه می‌شوند -->
+    </div>
+    
+    <!-- دکمه بازگشت به بالا -->
+    <button class="scroll-top-btn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- اسکریپت‌ها -->
     <script>
-        // داده‌های واحد Medic (از بازی گرفته می‌شود)
-        const medicData = {
-            members: [
-                {
-                    id: 1,
-                    name: "دکتر آراس",
-                    rank: "مدیر ارشد",
-                    rankIcon: "👑",
-                    rankLevel: 100,
-                    duty: "online",
-                    dutyText: "🟢 در حال خدمت",
-                    joinDate: "۱۴۰۲/۰۸/۱۵",
-                    missions: 247,
-                    successRate: "۹۸٪"
-                },
-                {
-                    id: 2,
-                    name: "پارامدیک علی",
-                    rank: "ناظر ارشد",
-                    rankIcon: "🎓",
-                    rankLevel: 85,
-                    duty: "online",
-                    dutyText: "🟢 در حال گشت‌زنی",
-                    joinDate: "۱۴۰۲/۰۹/۰۱",
-                    missions: 189,
-                    successRate: "۹۶٪"
-                },
-                {
-                    id: 3,
-                    name: "اکبر آمبولانس",
-                    rank: "ناظر",
-                    rankIcon: "🎓",
-                    rankLevel: 78,
-                    duty: "resting",
-                    dutyText: "🟡 در حال استراحت",
-                    joinDate: "۱۴۰۲/۰۹/۱۰",
-                    missions: 156,
-                    successRate: "۹۴٪"
-                },
-                {
-                    id: 4,
-                    name: "رضا درمان",
-                    rank: "پارامدیک",
-                    rankIcon: "🚑",
-                    rankLevel: 65,
-                    duty: "online",
-                    dutyText: "🟢 آماده به خدمت",
-                    joinDate: "۱۴۰۲/۱۰/۰۵",
-                    missions: 89,
-                    successRate: "۹۲٪"
-                },
-                {
-                    id: 5,
-                    name: "محسن نجات",
-                    rank: "پارامدیک",
-                    rankIcon: "🚑",
-                    rankLevel: 58,
-                    duty: "offline",
-                    dutyText: "🔴 آفلاین",
-                    joinDate: "۱۴۰۲/۱۰/۲۰",
-                    missions: 45,
-                    successRate: "۸۸٪"
-                },
-                {
-                    id: 6,
-                    name: "سارا پرستار",
-                    rank: "کارآموز",
-                    rankIcon: "📚",
-                    rankLevel: 32,
-                    duty: "online",
-                    dutyText: "🟢 تحت آموزش",
-                    joinDate: "۱۴۰۲/۱۱/۰۱",
-                    missions: 12,
-                    successRate: "۸۵٪"
-                }
-            ],
-            stats: {
-                totalMembers: 15,
-                onlineNow: 4,
-                activeAmbulances: 5,
-                totalAmbulances: 8,
-                avgResponseTime: "۲.۵ دقیقه",
-                monthlyMissions: 47,
-                successRate: "۹۵٪"
+        // تابع اسکرول به بالا
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // نمایش/مخفی کردن دکمه اسکرول
+        window.addEventListener('scroll', function() {
+            const scrollBtn = document.querySelector('.scroll-top-btn');
+            if (window.pageYOffset > 300) {
+                scrollBtn.style.display = 'flex';
+            } else {
+                scrollBtn.style.display = 'none';
             }
+        });
+        
+        // هدر اسکرول شده
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.modern-header');
+            if (window.pageYOffset > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // تایمر
+        function updateCountdown() {
+            const now = new Date();
+            const tomorrow = new Date(now);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            
+            const diff = tomorrow - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // آپدیت تایمر هر ثانیه
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+        
+        // آمار زنده (شبیه‌سازی)
+        function updateLiveStats() {
+            const onlineCount = Math.floor(Math.random() * 5) + 10;
+            const activeAmbulances = Math.floor(Math.random() * 3) + 4;
+            const todayMissions = Math.floor(Math.random() * 10) + 45;
+            const successRate = Math.floor(Math.random() * 3) + 96;
+            
+            document.getElementById('onlineCount').textContent = onlineCount;
+            document.getElementById('activeAmbulances').textContent = activeAmbulances;
+            document.getElementById('todayMissions').textContent = todayMissions;
+            document.getElementById('successRate').textContent = successRate + '%';
+        }
+        
+        // آپدیت آمار هر 30 ثانیه
+        setInterval(updateLiveStats, 30000);
+        updateLiveStats();
+        
+        // FAQ
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+        
+        // انیمیشن اسکرول
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         };
-
-        // تابع نمایش وضعیت Medic
-        function renderMedicStatus() {
-            const medicStatusDiv = document.getElementById('medicStatus');
-            const activePersonnelSpan = document.getElementById('activePersonnel');
-            const activeAmbulancesSpan = document.getElementById('activeAmbulances');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // مشاهده المان‌های انیمیشنی
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // نورهای متحرک
+        function createParticles() {
+            const container = document.querySelector('.particles-container');
+            const colors = ['#0ea5e9', '#ef4444', '#22c55e', '#eab308'];
             
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle particle-small';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.2;
+                container.appendChild(particle);
+            }
+        }
+        
+        createParticles();
+        
+        // نوتیفیکیشن
+        function showNotification(message, type = 'info') {
+            const container = document.querySelector('.live-notifications');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : type === 'error' ? 'times-circle' : 'info-circle'}"></i>
+                    <div>${message}</div>
+                </div>
+            `;
+            
+            container.appendChild(notification);
+            
+            // حذف خودکار بعد از 5 ثانیه
+            setTimeout(() => {
+                notification.style.animation = 'slideOutLeft 0.3s ease';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 5000);
+        }
+        
+        // نمایش نوتیفیکیشن نمونه
+        setTimeout(() => {
+            showNotification('🚑 واحد Medic آنلاین و آماده خدمت‌رسانی', 'success');
+        }, 2000);
+        
+        // ایجاد نمودار ساده
+        function createSimpleChart() {
+            const data = {
+                labels: ['دی', 'بهمن', 'اسفند', 'فروردین', 'اردیبهشت', 'خرداد'],
+                values: [35, 42, 38, 45, 50, 47]
+            };
+            
+            const chart = document.getElementById('activityChart');
+            if (!chart) return;
+            
+            const maxValue = Math.max(...data.values);
             let html = '';
-            let onlineCount = 0;
             
-            // نمایش هر عضو
-            medicData.members.forEach(member => {
-                if (member.duty === 'online') onlineCount++;
-                
-                const dutyClass = member.duty === 'online' ? 'member-duty-online' : 
-                                 member.duty === 'resting' ? 'member-duty-resting' : 'member-duty-offline';
-                
+            data.values.forEach((value, index) => {
+                const percentage = (value / maxValue) * 100;
                 html += `
-                    <div class="medic-member">
-                        <span class="member-name">${member.name}</span>
-                        <span class="member-rank">${member.rankIcon} ${member.rank}</span>
-                        <span class="member-duty ${dutyClass}">${member.dutyText}</span>
-                        <span class="member-level">سطح ${member.rankLevel}</span>
+                    <div class="chart-bar">
+                        <div class="bar-label">${data.labels[index]}</div>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: ${percentage}%"></div>
+                            <div class="bar-value">${value}</div>
+                        </div>
                     </div>
                 `;
             });
             
-            medicStatusDiv.innerHTML = html;
-            activePersonnelSpan.textContent = `${onlineCount} نفر`;
-            activeAmbulancesSpan.textContent = `${medicData.stats.activeAmbulances} از ${medicData.stats.totalAmbulances} دستگاه`;
-            
-            // آپدیت وضعیت واحد
-            document.getElementById('unitStatus').textContent = 
-                onlineCount >= 3 ? "فعال و عملیاتی" : 
-                onlineCount >= 1 ? "محدود" : "غیرفعال";
-        }
-
-        // تابع به‌روزرسانی وضعیت
-        function refreshMedicStatus() {
-            // شبیه‌سازی دریافت داده از بازی
-            medicData.stats.onlineNow = Math.floor(Math.random() * 3) + 3; // 3-5 نفر
-            medicData.stats.activeAmbulances = Math.floor(Math.random() * 3) + 4; // 4-6 دستگاه
-            
-            // تغییر وضعیت تصادفی برخی اعضا
-            medicData.members.forEach(member => {
-                if (Math.random() > 0.7) { // 30% احتمال تغییر
-                    const duties = ['online', 'resting', 'offline'];
-                    const dutyTexts = {
-                        'online': ['🟢 در حال خدمت', '🟢 آماده به خدمت', '🟢 در حال گشت‌زنی'],
-                        'resting': ['🟡 در حال استراحت', '🟡 مرخصی کوتاه'],
-                        'offline': ['🔴 آفلاین', '🔴 تعطیل']
-                    };
-                    
-                    const newDuty = duties[Math.floor(Math.random() * duties.length)];
-                    member.duty = newDuty;
-                    member.dutyText = dutyTexts[newDuty][Math.floor(Math.random() * dutyTexts[newDuty].length)];
-                }
-            });
-            
-            renderMedicStatus();
-            alert('✅ وضعیت واحد Medic به‌روزرسانی شد!');
-        }
-
-        // تابع شبیه‌سازی دریافت داده از API بازی
-        function fetchFromGameAPI() {
-            // این تابع می‌تواند از API سرور بازی داده بگیرد
-            console.log('📡 در حال دریافت داده از سرور بازی...');
-            
-            // شبیه‌سازی تأخیر شبکه
-            setTimeout(() => {
-                renderMedicStatus();
-                console.log('✅ داده‌های Medic دریافت شدند.');
-            }, 500);
-        }
-
-        // بارگذاری اولیه
-        document.addEventListener('DOMContentLoaded', function() {
-            renderMedicStatus();
-            fetchFromGameAPI();
-            
-            // به‌روزرسانی خودکار هر 60 ثانیه
-            setInterval(fetchFromGameAPI, 60000);
-            
-            console.log('🚑 سیستم ردیابی وضعیت Medic فعال شد.');
-        });
-
-        // حذف توابع قدیمی
-        function testSite() {
-            alert('این تابع حذف شده است.');
+            chart.innerHTML = html;
         }
         
-        function simulateEmergency() {
-            alert('این تابع حذف شده است.');
+        createSimpleChart();
+        
+        // چت زنده شبیه‌سازی
+        const chatMessages = [
+            { sender: 'مدیر سیستم', text: '👋 به واحد Medic خوش آمدید!', time: 'همین الان', type: 'admin' },
+            { sender: 'پشتیبانی', text: 'آماده پاسخگویی به سوالات شما هستیم.', time: '۲ دقیقه پیش', type: 'admin' },
+            { sender: 'کاربر', text: 'برای عضویت چه شرایطی لازمه؟', time: '۵ دقیقه پیش', type: 'user' },
+            { sender: 'پشتیبانی', text: 'شرایط در صفحه عضویت توضیح داده شده.', time: '۴ دقیقه پیش', type: 'admin' }
+        ];
+        
+        function simulateChat() {
+            const container = document.querySelector('.chat-messages');
+            if (!container) return;
+            
+            chatMessages.forEach(msg => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${msg.type}`;
+                messageDiv.innerHTML = `
+                    <div class="chat-sender">${msg.sender}</div>
+                    <div class="chat-text">${msg.text}</div>
+                    <div class="chat-time">${msg.time}</div>
+                `;
+                container.appendChild(messageDiv);
+            });
+            
+            // اسکرول به پایین
+            container.scrollTop = container.scrollHeight;
         }
+        
+        // اگر چت زنده در صفحه وجود دارد
+        if (document.querySelector('.chat-messages')) {
+            simulateChat();
+            
+            // ارسال پیام جدید هر 30 ثانیه
+            setInterval(() => {
+                const messages = [
+                    '🚑 آمبولانس جدید به ناوگان اضافه شد!',
+                    '📢 جلسه آموزش تیم فردا ساعت ۲۰ برگزار می‌شود.',
+                    '🎉 به کاربر جدید خوش آمد می‌گوییم!',
+                    '⚠️ توجه: ساعات اوج ترافیک ۲۰-۲۴'
+                ];
+                
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                const newMsg = {
+                    sender: 'سیستم',
+                    text: randomMessage,
+                    time: 'همین الان',
+                    type: 'admin'
+                };
+                
+                const container = document.querySelector('.chat-messages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `chat-message ${newMsg.type}`;
+                messageDiv.innerHTML = `
+                    <div class="chat-sender">${newMsg.sender}</div>
+                    <div class="chat-text">${newMsg.text}</div>
+                    <div class="chat-time">${newMsg.time}</div>
+                `;
+                container.appendChild(messageDiv);
+                container.scrollTop = container.scrollHeight;
+            }, 30000);
+        }
+        
+        // انیمیشن‌های hover
+        document.querySelectorAll('.hover-lift').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.transform = 'translateY(-10px)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // افکت تایپ برای متن‌های خاص
+        const typeElements = document.querySelectorAll('.typing-animation');
+        typeElements.forEach(el => {
+            const text = el.textContent;
+            el.textContent = '';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < text.length) {
+                    el.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            };
+            
+            setTimeout(typeWriter, 1000);
+        });
+        
+        // انیمیشن‌های ورود مرحله‌ای
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-left, .animate-fade-in-right');
+            
+            elements.forEach((el, index) => {
+                const delay = index * 100;
+                el.style.animationDelay = `${delay}ms`;
+            });
+        });
+        
+        // انیمیشن‌های پیشرفته برای کارت‌ها
+        document.querySelectorAll('.modern-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+                card.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.4)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.boxShadow = '';
+            });
+        });
     </script>
 </body>
 </html>
